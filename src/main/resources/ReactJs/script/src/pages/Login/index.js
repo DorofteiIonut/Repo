@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import { Button } from 'react-bootstrap';
 import TextFieldGroup from '../../componente/TextFieldGroup/index';
+import Header from '../../componente/Header/index'
 import './styles.css';
 
 class Login extends Component {
@@ -10,6 +10,7 @@ class Login extends Component {
       render() {
         return (
             <div className="divLogin">
+                <Header/>
                 <h1 className="pageLoginTitle"> Login</h1>
                 <TextFieldGroup/>
             </div>

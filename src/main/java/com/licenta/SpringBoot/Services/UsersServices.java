@@ -20,9 +20,21 @@ public class UsersServices {
 		return userList;
 	}
 	
-	public String saveUsers(String name, String pass, String role){
-		Users newUser=new Users( name, pass, role);
-		usersRepo.save(newUser);
+	public String saveUsers(Users user){
+		usersRepo.save(user);
 		return "Saved";
+	}
+	
+	public String loginUser(Users userLogin) {
+		String role=null;
+		List<Users> userList=new ArrayList<>();
+		usersRepo.findAll().forEach(userList::add);
+		for(int i=0; i<userList.size();i++) {
+			if(userLogin.equals(userList.get(i))) {
+				role=userList.get(i).getRole();
+			}
+		}
+		System.out.println("Login User Role:"+role);
+		return role;
 	}
 }

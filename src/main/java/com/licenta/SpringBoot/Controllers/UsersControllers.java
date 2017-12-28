@@ -30,11 +30,21 @@ public class UsersControllers {
 		 return new ResponseEntity<List<Users>>(listaUsers, HttpStatus.OK);
 	 }
 	 
-
 	 @CrossOrigin(origins = "http://localhost:3000")
 	 @RequestMapping(value = "/api/saveuser", method = RequestMethod.POST)
 	 public ResponseEntity<?> saveNewUser(@RequestBody Users user){
-		 services.saveUsers(user.getUserName(), user.getPassword(), user.getRole());
-		  return new ResponseEntity<>( HttpStatus.CREATED);
+		 services.saveUsers(user);
+		  return new ResponseEntity<Users>( user,HttpStatus.CREATED);
+	 }
+	 
+	 //TestLogin
+	 @CrossOrigin(origins = "http://localhost:3000")
+	 @RequestMapping(value = "/login", method = RequestMethod.POST)
+	 public ResponseEntity<?> login(@RequestBody Users user){
+		if( services.loginUser(user)!=null) {
+			user.setRole(services.loginUser(user));
+			  return new ResponseEntity<Users>( user,HttpStatus.OK);
+		}
+		 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 	 }
 }
