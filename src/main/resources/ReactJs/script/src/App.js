@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
-import { Navbar, Jumbotron, Button, Form } from 'react-bootstrap';
+import {Button ,Form} from 'react-bootstrap';
 
 class App extends Component {
 constructor(props){
