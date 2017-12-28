@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import './App.css';
-
+import 'bootstrap/dist/css/bootstrap.css';
+import 'bootstrap/dist/css/bootstrap-theme.css';
+import { Navbar, Jumbotron, Button, Form } from 'react-bootstrap';
 
 class App extends Component {
 constructor(props){
@@ -45,19 +46,14 @@ constructor(props){
 
   render() {
   
-    if(!this.state.data)
-      return <p>Looo.....</p>
+
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title"> Welcome to React </h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
-        <p> Api responseis:{this.state.data}
-          </p>
+      <div >
+        <Button bsStyle="danger" bsSize="large"> Submit</Button>
+        <Button color="danger">Danger!</Button>
+        <Form>
+        <Button bsStyle="danger" bsSize="large"> Submit</Button>
+          </Form>
       </div>
     );
   }
