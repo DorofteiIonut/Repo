@@ -1,7 +1,7 @@
 .formContainerDiv{
     background-color:whitesmoke;
     width: 30%;
-    height:40%;
+    height:50%;
     margin: auto;
     margin-left: 35%;
     padding: 5%;
@@ -12,6 +12,7 @@
 .loginButtonStyle{
     margin-left: 5%;
     margin-right: 5%;
+    margin-top: 5%;
     width: 90%;
 }
 
