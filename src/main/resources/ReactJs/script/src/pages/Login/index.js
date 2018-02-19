@@ -10,7 +10,7 @@ class Login extends Component {
       render() {
         return (
             <div className="divLogin">
-                <Header/>
+                <Header isLoginPage={true}/>
                 <h1 className="pageLoginTitle"> Login</h1>
                 <TextFieldGroup/>
             </div>
