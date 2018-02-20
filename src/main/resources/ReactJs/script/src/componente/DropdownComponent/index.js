@@ -7,10 +7,18 @@ class Dropdown extends Component {
   render() {
     return (
       <div className="headerDiv">
+        <a className="textlistaMedici" href="/medici">
         <p onClick={()=>this.onClick()}>Dentisti</p>
+        </a>
+        <a className="textlistaMedici" href="/medici">
         <p>Cardiolog</p>
+        </a>
+        <a className="textlistaMedici" href="/medici">
         <p>Pediatru</p>
+        </a>
+        <a className="textlistaMedici" href="/medici">
         <p>General</p>
+        </a>
       </div>
     );
   }

@@ -14,8 +14,6 @@ class Header extends Component {
   }
 
   render() {
-    console.log("____:" + this.props.isWelcomePage);
-    console.log("____:" + this.props.isLoginPage);
 
     return (
       <div className="headerContainerDiv">
@@ -40,11 +38,11 @@ class Header extends Component {
               )}
               {!this.props.isWelcomePage && !this.props.isLoginPage && (
                 <li>
-                  <a href="#">Cabinete</a>
+                  <a href="/cabinete">Cabinete</a>
                 </li>
               )}
               <li>
-                <a href="#">
+                <a href="/signUp">
                   <span class="glyphicon glyphicon-user" /> Sign Up
                 </a>
               </li>
