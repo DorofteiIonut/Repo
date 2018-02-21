@@ -1,7 +1,7 @@
-.formContainerDiv{
-    background-color:whitesmoke;
-    width: 30%;
-    height:50%;
+.formSignupContainerDiv{
+    background-color: rgb(72, 116, 101);
+    width: 40%;
+    height:80%;
     margin: auto;
     margin-left: 35%;
     padding: 5%;
