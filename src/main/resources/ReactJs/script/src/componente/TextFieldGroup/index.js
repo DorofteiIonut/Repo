@@ -68,13 +68,16 @@ class TextFieldGroup extends Component {
 
   _validation() {
     if(this.state.username ==null || this.state.username==""){
-      this.setState({isUsernameError:true})
-      if(this.state.password==null || this.state.password==""){
-        this.setState({isPassError:true})
-      return false;
-    }
+      this.setState({isUsernameError:true}) 
   }
+    if(this.state.password==null || this.state.password==""){
+    this.setState({isPassError:true})
+  }
+    if(this.state.isPassError || this.state.isUsernameError){
+      return false;
+    }else{ 
     return true;
+    }
   }
 
   _onLoginPress() {

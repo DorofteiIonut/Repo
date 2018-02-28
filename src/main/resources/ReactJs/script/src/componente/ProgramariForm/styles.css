@@ -1,0 +1,23 @@
+.formProgramariContainerDiv{
+    background-color: rgb(139, 168, 158);
+    width: 40%;
+    height:100%;
+    margin: auto;
+    margin-left: 35%;
+    padding: 5%;
+    border-radius:10%;
+    opacity: 0.60;
+}
+
+.loginButtonStyle{
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    width: 90%;
+}
+
+.textWarningDiv{
+    display: inline;
+}
+
+

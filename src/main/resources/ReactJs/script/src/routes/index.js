@@ -4,7 +4,9 @@ import Welcome from "../pages/Welcome/index";
 import Login from "../pages/Login/index";
 import Medici from "../pages/Medici/index";
 import Cabinete from "../pages/Cabinete/index";
-import SignUp from "../pages/SingUp/index";
+import SignUp from "../pages/SignUp/index";
+import RecMedici from "../pages/RecMedici/index";
+import Programari from "../pages/Programari/index";
 
 const Routes = () => (
   <BrowserRouter>
@@ -14,6 +16,8 @@ const Routes = () => (
     <Route exact path='/medici' component={Medici} />
     <Route exact path='/cabinete' component={Cabinete} />
     <Route exact path='/signUp' component={SignUp} />
+    <Route exact path='/recmedici' component={RecMedici} />
+    <Route exact path='/programari' component={Programari} />
     </Switch>
   </BrowserRouter>
 );

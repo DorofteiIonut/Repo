@@ -5,6 +5,8 @@
    margin-top: 6%;
 }
 .divMedici{
-    background-color: brown;
-    overflow:hidden;
+    background-image:url("../../assets/welcomeimg1.jpg");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    overflow:scroll;
 }
