@@ -32,7 +32,7 @@ class SignUpForm extends Component {
           <div className="form-group">
             <div className="textWarningDiv">
               <label> Username </label>
-               {this.state. isUsernameError && <MesajValidare mesaj={this.state.userErrMsg} />}
+               {this.state.isUsernameError && <MesajValidare mesaj={this.state.userErrMsg} />}
             </div>
             <input
               type="username"
@@ -68,7 +68,7 @@ class SignUpForm extends Component {
           <div className="form-group">
             <div className="textWarningDiv">
               <label> Parola </label>
-              {this.state. isPassError && <MesajValidare mesaj={this.state.passErrorMsg} />}
+              {this.state.isPassError && <MesajValidare mesaj={this.state.passErrorMsg} />}
             </div>
             <input
               type="password"
@@ -116,15 +116,15 @@ class SignUpForm extends Component {
 
   _validation() {
     
-    if(this.state.username ==null || this.state.username==""){
+    if(this.state.username ===null || this.state.username===""){
       this.setState({isUsernameError:true, })
     }
 
-      if(this.state.password==null || this.state.password==""){
+      if(this.state.password===null || this.state.password===""){
         this.setState({isPassError:true, passErrorMsg:"Introduceti parola"})
       }
 
-      if( this.state.confpassword==null || this.state.confpassword==""){
+      if( this.state.confpassword===null || this.state.confpassword===""){
         this.setState({isConfirmPassError:true})
       }
       
@@ -132,11 +132,11 @@ class SignUpForm extends Component {
          this.setState({isEmailError:true, emailErrMsg:"Email invalid"})
        }
 
-        if(this.state.email==null || this.state.email==""){
+        if(this.state.email===null || this.state.email===""){
           this.setState({isEmailError:true, emailErrMsg:"Introduceti adresa de email"})
         }
 
-        if(this.state.password!=this.state.confpassword){
+        if(this.state.password!==this.state.confpassword){
           this.setState({isConfirmPassError:true,
           confpassErrMsg:"Verificati parola de confirmare!"})
         }

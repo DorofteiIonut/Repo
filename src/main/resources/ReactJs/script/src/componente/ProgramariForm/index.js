@@ -3,165 +3,154 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 import { Button } from "react-bootstrap";
 import "./styles.css";
-import MesajValidare from "../../componente/MesajValidare/index";
 
 class ProgramariForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isNumeClientError:false,
-      isPrenumeClientError:false,
-      isCNPError:false,
-      isSpecializareError: false,
-      isMedicError: false,
-      isCabinetError: false,
+      isNumeClientError: false,
+      isPrenumeClientError: false,
+      isEmailError: false,
+      isTelefonError: false,
+      isDataError: false,
       isOraError: false,
-      nume:null,
-      prenume:null,
-      CNP: null,
-      specializare:null,
-      numeMed:null,
-      numeCab:null,
-      ora:null,
+      nume: null,
+      prenume: null,
+      email: "",
+      telefon: null,
+      data: null,
+      ora: null,
     };
   }
 
   render() {
     return (
-      <div className="formProgramariContainerDiv">
-        <form>
-          <div className="form-group">
-            <div className="textWarningDiv">
-              <label> Nume </label>
-               {this.state. isNumeClientError && <MesajValidare mesaj={"Introduceti numele dumneavoastra"} />}
+      <div className="divContent">
+        <form className=" formStyle">
+          <label className="labelStyles">
+            {" "}
+            Nume
+            <div className={this.state.isNumeClientError ? "inputError" : ""}>
+              <input
+                type="username"
+                className="form-control"
+                placeholder={
+                  this.state.isNumeClientError ? "Mesaj de eroare" : ""
+                }
+                onChange={text =>
+                  this.setState({
+                    nume: text.target.value,
+                    isNumeClientError: false
+                  })
+                }
+              />
             </div>
-            <input
-              type="username"
-              className="form-control"
-              placeholder="Nume"
-              onChange={text =>
-                this.setState({
-                  nume: text.target.value, isNumeClientError:false
-                })
-              }
-            />
-          </div>
+          </label>
 
-
-          <div className="form-group">
-            <div className="textWarningDiv">
-              <label> Prenume</label>
-              {this.state.isPrenumeClientError &&<MesajValidare mesaj={"Introduceti prenumele dumneavoastra"} />}
+          <label className="labelStyles">
+            {" "}
+            Prenume
+            <div
+              className={this.state.isPrenumeClientError ? "inputError" : ""}
+            >
+              <input
+                type="name"
+                className="form-control"
+                placeholder={
+                  this.state.isPrenumeClientError ? "Mesaj de eroare" : ""
+                }
+                onChange={text =>
+                  this.setState({
+                    prenume: text.target.value,
+                    isPrenumeClientError: false
+                  })
+                }
+              />
             </div>
-            <input
-              type="name"
-              className="form-control"
-              placeholder="Prenume"
-              onChange={text =>
-                this.setState({
-                 prenume: text.target.value, isPrenumeClientError:false
-                })
-              }
-            />
-          </div>
+          </label>
 
-
-          <div className="form-group">
-            <div className="textWarningDiv">
-              <label> CNP </label>
-              {this.state. isCNPError && <MesajValidare mesaj={"CNP"} />}
+          <label className="labelStyles">
+            {" "}
+            E-mail
+            <div className={this.state.isEmailError ? "inputError" : ""}>
+              <input
+                type="email"
+                value={this.state.email}
+                className="form-control"
+                placeholder={this.state.isEmailError ? "Invalid email" : "ex: adresamail@email.com"}
+                onChange={text =>{
+                  this.setState({
+                    email: text.target.value,
+                    isEmailError: false
+                  })
+                }}
+              />
             </div>
-            <input
-              type="name"
-              className="form-control"
-              placeholder="CNP"
-              onChange={text =>
-                this.setState({
-                  CNP: text.target.value, isCNPError:false
-                })
-              }
-            />
-          </div>
+          </label>
 
-
-          <div className="form-group">
-            <div className="textWarningDiv">
-              <label> Specializarea </label>
-              {this.state.isSpecializareError && <MesajValidare mesaj={"Alege specializarea la care vrei programare"} />}
+          <label className="labelStyles">
+            {" "}
+            Numar telefon
+            <div className={this.state.isTelefonError ? "inputError" : ""}>
+              <input
+                type="name"
+                value={this.state.telefon}
+                className="form-control"
+                placeholder={this.state.isTelefonError ? "Mesaj de eroare" : ""}
+                onChange={text =>
+                  this.setState({
+                    telefon: text.target.value,
+                    isTelefonError: false
+                  })
+                }
+              />
             </div>
-            <input
-              type="name"
-              className="form-control"
-              placeholder="Specializarea"
-              onChange={text =>
-                this.setState({
-                 specializare: text.target.value, isSpecializareError:false
-                })
-              }
-            />
-          </div>
+          </label>
 
-          <div className="form-group">
-            <div className="textWarningDiv">
-              <label> Medic </label>
-              {this.state.isMedicError && <MesajValidare mesaj={"Medic"} />}
+          <label className="labelStyles">
+            {" "}
+            Data
+            <div className={this.state.isDataError ? "inputError" : ""}>
+              <input
+                type="name"
+                className="form-control"
+                placeholder={this.state.isDataError ? "Mesaj de eroare" : "zi.luna.an"}
+                onChange={text =>
+                  this.setState({
+                    data: text.target.value,
+                    isDataError: false
+                  })
+                }
+              />
             </div>
-            <input
-              type="name"
-              className="form-control"
-              placeholder="Medic"
-              onChange={text =>
-                this.setState({
-                 numeMed: text.target.value, isMedicError:false
-                })
-              }
-            />
-          </div>
+          </label>
 
-          <div className="form-group">
-            <div className="textWarningDiv">
-              <label> Cabinetul </label>
-              {this.state.isCabinetError && <MesajValidare mesaj={"Alege cabinetul"} />}
+          <label className="labelStyles">
+            {" "}
+            Ora programarii
+            <div className={this.state.isOraError ? "inputError" : ""}>
+              <input
+                type="name"
+                className="form-control"
+                placeholder={this.state.isOraError ? "Mesaj de eroare" : ""}
+                onChange={text =>
+                  this.setState({
+                    ora: text.target.value,
+                    isOraError: false
+                  })
+                }
+              />
             </div>
-            <input
-              type="name"
-              className="form-control"
-              placeholder="Cabinet"
-              onChange={text =>
-                this.setState({
-                 numeCab: text.target.value, isCabinetError:false
-                })
-              }
-            />
-          </div>
-
-          <div className="form-group">
-            <div className="textWarningDiv">
-              <label> Ora programarii </label>
-              {this.state.isOraError && <MesajValidare mesaj={"Alege ora programarii"} />}
-            </div>
-            <input
-              type="name"
-              className="form-control"
-              placeholder="Ora"
-              onChange={text =>
-                this.setState({
-                 ora: text.target.value, isOraError:false
-                })
-              }
-            />
-          </div>
-
-
+          </label>
 
           <Button
-            bsStyle="info"
+            bsStyle=""
             bsSize="lg"
-            className="loginButtonStyle"
+            className="btnStyle"
             onClick={() => this._onLoginPress()}
           >
-            Trimite
+            Save
           </Button>
         </form>
       </div>
@@ -169,46 +158,89 @@ class ProgramariForm extends Component {
   }
 
   _validation() {
-    
-    if(this.state.nume ==null || this.state.nume==""){
-      this.setState({isNumeClientError:true, })
+    if (this.state.nume === null || this.state.nume === "") {
+      this.setState({ isNumeClientError: true });
     }
 
-      if(this.state.prenume==null || this.state.prenume==""){
-        this.setState({isPrenumeClientError:true})
-      }
-
-      if( this.state.CNP==null || this.state.CNP==""){
-        this.setState({isCNPError:true})
-      }
-      
-      if(!this.validateEmail(this.state.email)){
-         this.setState({isEmailError:true, emailErrMsg:"Email invalid"})
-       }
-
-        if(this.state.email==null || this.state.email==""){
-          this.setState({isEmailError:true, emailErrMsg:"Introduceti adresa de email"})
-        }
-
-        if(this.state.isEmailError || this.state.isPassError || this.state.isUsernameError){
-      return false;
-        }else{
-      return true;
-        }
-  }
+    if (this.state.prenume === null || this.state.prenume === "") {
+      this.setState({ isPrenumeClientError: true });
+    }
 
   
-//    validateEmail(email) {
-//     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-//     return re.test(String(email).toLowerCase());
-// }
+    if (this.state.telefon === null || this.state.telefon === "") {
+      this.setState({ isTelefonError: true });
+    }
+    
+   
+
+    if (!this.validateEmail(this.state.email)) {
+      this.setState({
+        email: "",
+        isEmailError: true,
+      });
+    }
+
+    if (this.state.email === null || this.state.email === "") {
+      this.setState({ isEmailError: true });
+    }
+
+    if (this.state.ora === null || this.state.ora === "") {
+      this.setState({ isOraError: true });
+    }
+    if (this.state.data === null || this.state.data === "") {
+      this.setState({ isDataError: true });
+    } 
+
+    if(!this.validareData(this.state.data)){
+      this.setState({
+        data:"",
+        isDataError:true,
+      });
+    }
+    
+    if(!this.validareTel(this.state.telefon)){
+      this.setState({
+        telefon:"",
+        isTelefonError:true,
+        
+      });
+     
+    }
+
+    if (
+      this.state.isEmailError ||
+      this.state.isDataError ||
+      this.state.isNumeClientError
+    ) {
+      return false;
+    } else {
+      return true;
+    }
+  }
+
+  validateEmail(email) {
+    var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return re.test(String(email).toLowerCase());
+  }
+  validareTel(telefon){
+    if(telefon.length !==10 || isNaN(telefon)){
+     return false;
+    }
+    return true;
+
+  }
+  validareData(data){
+    var re=/^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/
+  return re.test(String(data).toLowerCase());
+  
+  }
+
 
   _onLoginPress() {
     try {
       if (!this._validation()) {
         throw new Error("Try again!");
       }
-      this._callApi();
     } catch (error) {
       console.log(error.message);
     }

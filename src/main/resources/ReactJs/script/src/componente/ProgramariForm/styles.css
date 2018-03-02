@@ -1,23 +1,37 @@
-.formProgramariContainerDiv{
-    background-color: rgb(139, 168, 158);
-    width: 40%;
-    height:100%;
-    margin: auto;
-    margin-left: 35%;
-    padding: 5%;
-    border-radius:10%;
-    opacity: 0.60;
-}
 
-.loginButtonStyle{
-    margin-left: 5%;
+.divContent{
+    background-color: rgba(118, 111, 134, 0.459);
+    margin-left: 15%;
     margin-right: 5%;
-    margin-top: 5%;
-    width: 90%;
+    border-radius: 20%;
+    
 }
 
-.textWarningDiv{
-    display: inline;
+.btnStyle{
+    width: 30%;
+    height: 2%;
+    margin-left: 30%;
+  background-color: rgba(7, 63, 44, 0.658);
+
+}
+
+.labelStyles{
+    padding-top: 2%;
+    margin-right: 5%;
+}
+
+
+.formStyle{
+   padding: 7%;
+}
+.specializariStyle{
+    width: 80%;
+    height: 20%;
+}
+.inputError{
+    border-style: solid;
+    border-color: rgb(180, 15, 15);
+    border-radius: 8%;
 }
 
 

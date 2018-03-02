@@ -61,7 +61,7 @@ class Header extends Component {
   }
 
   changeDropState() {
-    if (this.state.drop == false)
+    if (this.state.drop === false)
       this.setState({
         drop: true
       });

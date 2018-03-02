@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
-import { Button, Label } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import "./styles.css";
-import MesajValidare from "../../componente/MesajValidare/index";
 
 class RecMediciForm extends Component {
   constructor(props) {
@@ -166,30 +165,30 @@ class RecMediciForm extends Component {
     );
   }
   _validation() {
-    if (this.state.nume == null || this.state.nume == "") {
+    if (this.state.nume === null || this.state.nume === "") {
       this.setState({ isNumeError: true });
     }
 
-    if (this.state.prenume == null || this.state.prenume == "") {
+    if (this.state.prenume === null || this.state.prenume === "") {
       this.setState({ isPrenumeError: true });
     }
 
-    if (this.state.adresa == null || this.state.adresa == "") {
+    if (this.state.adresa === null || this.state.adresa === "") {
       this.setState({ isAdresaError: true });
     }
     if(!this.validateEmail(this.state.email)){
       this.setState({isEmailError:true, emailErrMsg:"Email invalid"})
     }
 
-    if (this.state.email == null || this.state.email == "") {
+    if (this.state.email === null || this.state.email === "") {
       this.setState({ isEmailError: true, emailErrMsg:"Introduceti adresa de mail"});
     }
 
-    if (this.state.nr == null || this.state.nr == "") {
+    if (this.state.nr === null || this.state.nr === "") {
       this.setState({ isNrtelError: true });
     }
 
-    if (this.state.specializare == null || this.state.specializare == "") {
+    if (this.state.specializare === null || this.state.specializare === "") {
       this.setState({ isSpecializare: true });
     }
   }
