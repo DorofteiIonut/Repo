@@ -12,7 +12,11 @@ public class Application {
 	
 	public static void main(String[] args) {
 		SpringApplication.run(Application.class, args);
-		System.out.println("Spring App");
+		System.out.println("---------------------- -------------------------------------");
+		System.out.println("---------------------- Spring Aplication -------------------");
+		System.out.println("---------------------Licenta@BiancaGolea -------------------");
+		System.out.println("---------------------------------------- -------------------");
+		System.out.println("---------------------- ----------------- -------------------");
 	}
 	
 	@Bean

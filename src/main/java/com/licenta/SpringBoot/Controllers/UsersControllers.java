@@ -37,14 +37,4 @@ public class UsersControllers {
 		  return new ResponseEntity<Users>( user,HttpStatus.CREATED);
 	 }
 	 
-	 //TestLogin
-	 @CrossOrigin(origins = "http://localhost:3000")
-	 @RequestMapping(value = "/login", method = RequestMethod.POST)
-	 public ResponseEntity<?> login(@RequestBody Users user){
-		if( services.loginUser(user)!=null) {
-			user.setRole(services.loginUser(user));
-			  return new ResponseEntity<Users>( user,HttpStatus.OK);
-		}
-		 return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-	 }
 }

@@ -3,6 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 import "./styles.css";
 import Dropdown from "../DropdownComponent/index";
+import {Link} from "react-router-dom";
 
 class Header extends Component {
   constructor(props) {
@@ -22,35 +23,37 @@ class Header extends Component {
           <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
               <li>
-                <a href="/">Welcome Page</a>
+                <Link to={"/"}>Welcome Page</Link>
               </li>
-              {!this.props.isWelcomePage && !this.props.isLoginPage && (
+              {!this.props.isWelcomePage && !this.props.isLoginPage && !this.props.isSignUp &&(
                 <li>
-                  {" "}
-                  <a href="#">
+                 
+                  <Link to={"/medici"}>
                     <div className="divList">
-                      {" "}
+                      
                       <p onClick={() => this.changeDropState()}> Medici</p>
                       {this.state.drop && <Dropdown />}
-                    </div>{" "}
-                  </a>
+                    </div>
+                  </Link>
                 </li>
               )}
-              {!this.props.isWelcomePage && !this.props.isLoginPage && (
+              {!this.props.isWelcomePage && !this.props.isLoginPage && !this.props.isSignUp &&(
                 <li>
-                  <a href="/cabinete">Cabinete</a>
+                  <Link to={"/cabinete"}>Cabinete</Link>
                 </li>
               )}
+                {!this.props.isSignUp && (
               <li>
-                <a href="/signUp">
+                <Link to={"/signUp"}>
                   <span class="glyphicon glyphicon-user" /> Sign Up
-                </a>
+                </Link>
               </li>
+              )}
               {!this.props.isLoginPage && (
                 <li>
-                  <a href="/login">
+                  <Link to={"/login"}>
                     <span class="glyphicon glyphicon-log-in" /> Login
-                  </a>
+                  </Link>
                 </li>
               )}
             </ul>
