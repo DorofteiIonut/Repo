@@ -18,13 +18,15 @@ public class TokenAuthService {
 	  static final String SECRET = "ThisIsASecret";
 	  static final String TOKEN_PREFIX = "Bearer";
 	  static final String HEADER_STRING = "Authorization";
-
+	  static  String JWT=null;
+	  
 	  static void addAuthentication(HttpServletResponse res, String username) {
-	    String JWT = Jwts.builder()
+	     JWT = Jwts.builder()
 	        .setSubject(username)
 	        .setExpiration(new Date(System.currentTimeMillis() + EXPIRATIONTIME))
 	        .signWith(SignatureAlgorithm.HS512, SECRET)
 	        .compact();
+		res.addDateHeader(JWT, 120);
 	    res.addHeader(HEADER_STRING, TOKEN_PREFIX + " " + JWT);
 	  }
 
@@ -44,7 +46,14 @@ public class TokenAuthService {
 	    }
 	    return null;
 	  }
-	
-	
+
+	public static String getJWT() {
+		return JWT;
+	}
+
+	public static String jsonToken() {
+		//{"username":"Bianca","password":"admin"}
+		return "{\"Token\":\""+JWT+"\"}";
+	}
 
 }

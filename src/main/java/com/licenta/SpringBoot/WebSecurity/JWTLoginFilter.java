@@ -2,7 +2,8 @@ package com.licenta.SpringBoot.WebSecurity;
 
 import java.io.IOException;
 import java.util.Collections;
-
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -41,10 +42,7 @@ public class JWTLoginFilter extends AbstractAuthenticationProcessingFilter {
 			Authentication authResult) throws IOException, ServletException {
 		TokenAuthService.addAuthentication(response, authResult.getName());
 		
-		
-		
+		response.getWriter().write(TokenAuthService.jsonToken());
 	}
 	
-	
-
 }
