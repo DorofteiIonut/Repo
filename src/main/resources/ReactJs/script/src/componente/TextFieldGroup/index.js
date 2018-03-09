@@ -4,6 +4,8 @@ import "bootstrap/dist/css/bootstrap-theme.css";
 import { Button } from "react-bootstrap";
 import "./styles.css";
 import MesajValidare from "../MesajValidare/index";
+import { connect } from 'react-redux'
+import {loginUser} from "../../commun/ReduxActions/LoginReduxAction";
 
 class TextFieldGroup extends Component {
   constructor(props) {
@@ -91,28 +93,38 @@ class TextFieldGroup extends Component {
     }
   }
 
-  async _callApi() {
-    const url = "http://localhost:8080/login";
+  // async _callApi() {
+  //   const url = "http://localhost:8080/login";
 
-    try {
-      const resp = await fetch(url, {
-        method: "POST",
-        headers: {
-          Accept: "application/json",
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify({
-          userName: this.state.username,
-          password: this.state.password,
-          role: ""
-        })
-      });
-      const jS = await resp.json();
-      console.log(JSON.stringify(jS));
-    } catch (err) {
-      console.log("Error:" + err.message);
-    }
-  }
+  //   try {
+  //     const resp = await fetch(url, {
+  //       method: "POST",
+  //       headers: {
+  //         Accept: "application/json",
+  //         "Content-Type": "application/json"
+  //       },
+  //       body: JSON.stringify({
+  //         userName: this.state.username,
+  //         password: this.state.password,
+  //         role: ""
+  //       })
+  //     });
+  //     const jS = await resp.json();
+  //     console.log(JSON.stringify(jS));
+  //   } catch (err) {
+  //     console.log("Error:" + err.message);
+  //   }
+  // }
 }
 
-export default TextFieldGroup;
+function mapStateToProps(state){
+  return {
+    authInfo:state.loginReducer
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return { actionsLogin: loginUser(username, password) }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(TextFieldGroup)
