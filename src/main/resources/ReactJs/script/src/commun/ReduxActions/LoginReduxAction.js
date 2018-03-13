@@ -1,32 +1,29 @@
-import {loginReducer} from "../ReduxReducers/AuthReducer";
 import loginConstants from "../Constants";
 import loginUrl from "../../Api/Api"; 
 
-export function loginUser(username, password) {
-    console.log("-------- "+loginUrl);
-    return dispatch => {
+export default function loginUser(username, password) {
+    return async function (dispatch) {
       dispatch({ type: loginConstants.LOGIN_IN_PROGRESS})
       try {
-        const resp = await fetch(loginUrl, {
+        const resp = await fetch(loginUrl.loginUrl, {
           method: "POST",
           headers: {
             Accept: "application/json",
             "Content-Type": "application/json"
           },
           body: JSON.stringify({
-            userName: this.state.username,
-            password: this.state.password,
+            username: username,
+            password: password,
           })
         });
-        const jS = await resp.json();
-        console.log(JSON.stringify(jS));
-        if(jS==null){
-            throw new Error("Login Error");
+        const json = await resp.json();
+        if(json==null || resp.status!==200){
+            throw new Error(json.error);
         }
-        dispatch({ type: loginConstants.LOGIN_SUCCES})
+        dispatch({ type: loginConstants.LOGIN_SUCCES,payload:json.Token})
       } catch (err) {
-        console.log("Error:" + err.message);
-        dispatch({ type: loginConstants.LOGIN_FAILURE,err})
+        console.log("Error --:" + err.message);
+        dispatch({ type: loginConstants.LOGIN_FAILURE,payload:err.message})
       }
-    }
+    };
   }

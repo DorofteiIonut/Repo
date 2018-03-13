@@ -5,7 +5,8 @@ import { Button } from "react-bootstrap";
 import "./styles.css";
 import MesajValidare from "../MesajValidare/index";
 import { connect } from 'react-redux'
-import {loginUser} from "../../commun/ReduxActions/LoginReduxAction";
+import loginUser from "../../commun/ReduxActions/LoginReduxAction";
+import {bindActionCreators} from 'redux';  
 
 class TextFieldGroup extends Component {
   constructor(props) {
@@ -82,49 +83,28 @@ class TextFieldGroup extends Component {
     }
   }
 
-  _onLoginPress() {
+async _onLoginPress() {
+    console.log(JSON.stringify(this.props.authInfo));
     try {
       if (!this._validation()) {
         throw new Error("Try again!");
       }
-      this._callApi();
+      await this.props.loginUser(this.state.username,this.state.password);
+      console.log(JSON.stringify(this.props.authInfo.token));
     } catch (error) {
       console.log(error.message);
     }
   }
-
-  // async _callApi() {
-  //   const url = "http://localhost:8080/login";
-
-  //   try {
-  //     const resp = await fetch(url, {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json"
-  //       },
-  //       body: JSON.stringify({
-  //         userName: this.state.username,
-  //         password: this.state.password,
-  //         role: ""
-  //       })
-  //     });
-  //     const jS = await resp.json();
-  //     console.log(JSON.stringify(jS));
-  //   } catch (err) {
-  //     console.log("Error:" + err.message);
-  //   }
-  // }
 }
 
 function mapStateToProps(state){
   return {
-    authInfo:state.loginReducer
+    authInfo:state.authReducer
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actionsLogin: loginUser(username, password) }
+  return bindActionCreators({ loginUser:(username,password)=>loginUser(username,password)},dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextFieldGroup)
+export default connect(mapStateToProps,mapDispatchToProps)(TextFieldGroup)

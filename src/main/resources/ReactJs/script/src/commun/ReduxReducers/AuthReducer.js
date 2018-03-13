@@ -1,33 +1,38 @@
 import loginConstants from "../Constants"; 
 
-const initialState = {
+export const initialState = {
    inProgress:false,
-   token=null,
-   username=null,
-   error=null
+   token:null,
+   error:null
 };
  
- 
-export function loginReducer(state = initialState, action) {
+export default function loginReducer(state = initialState, action) {
     switch(action.type){
-        case loginConstants.LOGIN_IN_PROGRESS:{
-            inProgress:true;
+        case loginConstants.LOGIN_IN_PROGRESS:{ 
+            state={
+                ...state,
+                inProgress:true,
+                token:null,
+                error:null,
+            };
             break;
         }
         case loginConstants.LOGIN_SUCCES:{
-            token:action.payload.token;
-            username:action.payload.username;
-            inProgress:false;
+            state={
+                ...state,
+                inProgress:false,
+                token:action.payload,
+            };
             break;
            } 
            case loginConstants.LOGIN_FAILURE:{
-            token:null;
-            username:null;
-            inProgress:false;
-            error:action.payload;
+            state={
+                ...state,
+                inProgress:false,
+               error:action.payload,
+            };
             break;
            }
-           default: break;
     }
-
+    return state;
 }

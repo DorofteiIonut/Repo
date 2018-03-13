@@ -11,7 +11,11 @@
     "react-redux": "^5.0.7",
     "react-router-dom": "^4.2.2",
     "react-scripts": "1.0.17",
-    "react-simple-dropdown": "^3.2.0"
+    "react-simple-dropdown": "^3.2.0",
+    "reactotron-redux": "^1.13.0",
+    "reactron": "0.0.0",
+    "redux": "^3.7.2",
+    "redux-thunk": "^2.2.0"
   },
   "scripts": {
     "start": "react-scripts start",
