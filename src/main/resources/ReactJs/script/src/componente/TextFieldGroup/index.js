@@ -6,7 +6,8 @@ import "./styles.css";
 import MesajValidare from "../MesajValidare/index";
 import { connect } from 'react-redux'
 import loginUser from "../../commun/ReduxActions/LoginReduxAction";
-import {bindActionCreators} from 'redux';  
+import {bindActionCreators} from 'redux'; 
+import {withRouter} from 'react-router-dom';
 
 class TextFieldGroup extends Component {
   constructor(props) {
@@ -21,6 +22,8 @@ class TextFieldGroup extends Component {
   }
 
   render() {
+
+
     return (
       <div className="formContainerDiv">
         <form>
@@ -56,6 +59,7 @@ class TextFieldGroup extends Component {
               }
             />
           </div>
+          {!this.props.authInfo.inProgress && 
           <Button
             bsStyle="info"
             bsSize="lg"
@@ -64,6 +68,11 @@ class TextFieldGroup extends Component {
           >
             Login
           </Button>
+          }
+          {this.props.authInfo.inProgress &&
+          <div>
+          <img src={require("../../assets/Load.gif")} className="styleGif"/>
+            </div>}
         </form>
       </div>
     );
@@ -91,6 +100,9 @@ async _onLoginPress() {
       }
       await this.props.loginUser(this.state.username,this.state.password);
       console.log(JSON.stringify(this.props.authInfo.token));
+      if(this.props.authInfo.token!==null){
+        this.props.history.push('/medici');
+      }
     } catch (error) {
       console.log(error.message);
     }
@@ -107,4 +119,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ loginUser:(username,password)=>loginUser(username,password)},dispatch);
 }
 
-export default connect(mapStateToProps,mapDispatchToProps)(TextFieldGroup)
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(TextFieldGroup))

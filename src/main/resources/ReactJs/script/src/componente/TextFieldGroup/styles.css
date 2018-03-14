@@ -19,5 +19,9 @@
 .textWarningDiv{
     display: inline;
 }
-
+.styleGif{
+    width: 20%;
+    height: 20%;
+    margin-left: 40%;
+}
 
