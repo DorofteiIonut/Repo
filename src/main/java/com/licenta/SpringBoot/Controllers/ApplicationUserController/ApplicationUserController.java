@@ -21,6 +21,7 @@ public class ApplicationUserController {
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value="/sign-up", method=RequestMethod.POST)
 	public void signup(@RequestBody ApplicationUser date){
+		System.out.println("SignUp:" +date.toString());
 		ApplicationUser dateUser=date;
 		PasswordEncoder pass=new BCryptPasswordEncoder();
 		String encodedPass=pass.encode(date.getPassword());

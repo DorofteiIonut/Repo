@@ -93,13 +93,13 @@ class TextFieldGroup extends Component {
   }
 
 async _onLoginPress() {
-    console.log(JSON.stringify(this.props.authInfo));
+   
     try {
       if (!this._validation()) {
         throw new Error("Try again!");
       }
       await this.props.loginUser(this.state.username,this.state.password);
-      console.log(JSON.stringify(this.props.authInfo.token));
+      
       if(this.props.authInfo.token!==null){
         this.props.history.push('/medici');
       }

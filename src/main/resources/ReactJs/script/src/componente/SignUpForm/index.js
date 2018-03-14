@@ -4,6 +4,7 @@ import "bootstrap/dist/css/bootstrap-theme.css";
 import { Button } from "react-bootstrap";
 import "./styles.css";
 import MesajValidare from "../../componente/MesajValidare/index";
+import signUpUrl from "../../Api/Api";
 
 class SignUpForm extends Component {
   constructor(props) {
@@ -162,6 +163,30 @@ class SignUpForm extends Component {
       this._callApi();
     } catch (error) {
       console.log(error.message);
+    }
+  }
+ async _callApi(){
+    try {
+      const resp = await fetch(signUpUrl.signUpUrl, {
+        method: "POST",
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify({
+          username:this.state.username,
+          password:this.state.password,
+          email:this.state.email,
+        })
+      });
+      const json = await resp.json();
+      if(json==null || resp.status!==200){
+          throw new Error(json.error);
+      }
+      
+    } catch (err) {
+      console.log("Error --:" + err.message);
+      
     }
   }
 }
