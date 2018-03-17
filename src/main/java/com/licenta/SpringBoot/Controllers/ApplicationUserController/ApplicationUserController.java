@@ -28,4 +28,8 @@ public class ApplicationUserController {
 		dateUser.setPassword(encodedPass);
 		userRepo.save(dateUser);
 	}
+	
+//	@CrossOrigin(origins = "http://localhost:3000")
+//	@RequestMapping(value="/recmedic", method=RequestMethod.POST)
+	
 }

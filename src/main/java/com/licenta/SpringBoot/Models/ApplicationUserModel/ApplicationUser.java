@@ -18,9 +18,16 @@ public class ApplicationUser {
 	private String password;
 	@Column(nullable=false, unique=true)
 	private String email;
+	@Column(name="rol")
+	private String rol;
 	
 	
-	
+	public String getRol() {
+		return rol;
+	}
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
 	public String getEmail() {
 		return email;
 	}
@@ -49,7 +56,7 @@ public class ApplicationUser {
 	
 	@Override
 	public String toString() {
-		return "ApplicationUser [id=" + id + ", username=" + username + ", password=" + password + ", email="+ email+"]";
+		return "ApplicationUser [id=" + id + ", username=" + username + ", password=" + password + ", email="+ email+", rol="+rol+"]";
 	}
 	
 	

@@ -12,7 +12,7 @@ class ProfilMedic extends Component {
           <Header isWelcomePage={true}/>
         </div>
         <div className="div">
-<p className="p"> DR. Ionut El'smechero Dorofet </p>
+<p className="p"> Doctor Popescu Elena </p>
         <div className="divCartonas">
         
 
@@ -23,13 +23,11 @@ class ProfilMedic extends Component {
           <p> Cabinet: policlinica </p>
           <p >Orar: L-V: 12-17 </p>
           <p> Cabinet: Spital </p>
-          <p > Email: elsmech.12@yahoo.com </p>
+          <p > Email: popescue.12@yahoo.com </p>
           <p > Telefon: 07123456</p>
-          <p > Facebook:  </p>
+          <p > Facebook: /popescu.elena </p>
          
           </div>
-       
-          
          
           </div>
          </div>
