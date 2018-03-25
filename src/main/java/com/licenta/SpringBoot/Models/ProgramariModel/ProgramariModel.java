@@ -1,6 +1,8 @@
 package com.licenta.SpringBoot.Models.ProgramariModel;
 
-import java.sql.Timestamp;
+
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +12,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
 
 @Entity
@@ -22,15 +27,45 @@ public class ProgramariModel {
 	@Column(name="ID_PROGRAMARE")
 	private long id_programare;
 	
-	@Column(nullable=false,name="ZI")
-	private String zi;
 	
-	@Column(nullable=false,name="ORA")
-	private Timestamp ora;
+	@Column(nullable=false,name="DATA")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date data;
+	
+	@Column(nullable=false, name="NUME")
+	private String nume;
+	
+	@Column(nullable=false, name="PRENUME")
+	private String prenume;
+	
+	@Column(nullable=false, name="EMAIL")
+	private String email;
+	
+	@Column(nullable=false, name="NRTEL")
+	private String nrtel;
 	
 	@ManyToOne
 	@JoinColumn(name="IDMED")
-	private MediciModel programare;
+	@JsonBackReference
+	private MediciModel medic;
+
+	public ProgramariModel() {
+	}
+
+	
+	
+	public ProgramariModel(long id_programare, Date data, String nume, String prenume, String email, String nrtel,
+			MediciModel medic) {
+		this.id_programare = id_programare;
+		this.data = data;
+		this.nume = nume;
+		this.prenume = prenume;
+		this.email = email;
+		this.nrtel = nrtel;
+		this.medic = medic;
+	}
+
+
 
 	public long getId_programare() {
 		return id_programare;
@@ -40,36 +75,58 @@ public class ProgramariModel {
 		this.id_programare = id_programare;
 	}
 
-	public String getZi() {
-		return zi;
+	public Date getData() {
+		return data;
 	}
 
-	public void setZi(String zi) {
-		this.zi = zi;
+	public void setData(Date data) {
+		this.data = data;
 	}
 
-	
-
-	public Timestamp getOra() {
-		return ora;
+	public String getNume() {
+		return nume;
 	}
 
-	public void setOra(Timestamp ora) {
-		this.ora = ora;
+	public void setNume(String nume) {
+		this.nume = nume;
 	}
 
-	public MediciModel getProgramare() {
-		return programare;
+	public String getPrenume() {
+		return prenume;
 	}
 
-	public void setProgramare(MediciModel programare) {
-		this.programare = programare;
+	public void setPrenume(String prenume) {
+		this.prenume = prenume;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getNrtel() {
+		return nrtel;
+	}
+
+	public void setNrtel(String nrtel) {
+		this.nrtel = nrtel;
+	}
+
+	public MediciModel getMedic() {
+		return medic;
+	}
+
+	public void setMedic(MediciModel medic) {
+		this.medic = medic;
 	}
 
 	@Override
 	public String toString() {
-		return "ProgramariModel [id_programare=" + id_programare + ", zi=" + zi + ", ora=" + ora + ", programare="
-				+ programare + "]";
+		return "ProgramariModel [id_programare=" + id_programare + ", data=" + data + ", nume=" + nume + ", prenume="
+				+ prenume + ", email=" + email + ", nrtel=" + nrtel + ", medic=" + medic + "]";
 	}
-	
+
 }

@@ -1,6 +1,6 @@
 package com.licenta.SpringBoot.Models.RecenziiModel;
 
-import java.sql.Timestamp;
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +10,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
 
 @Entity
@@ -40,12 +43,33 @@ public class RecenziiModel {
 	@Column( name="DESCRIERE")
 	private String descriere;
 	
-	@Column(name="Data")
-	private Timestamp data;
+	@Column(name="DATARECENZIE")
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataRecenzie;
 	
 	@ManyToOne
 	@JoinColumn(name="IDMED")
-	private MediciModel recenzie;
+	@JsonBackReference
+	private MediciModel medic;
+
+	public RecenziiModel() {
+	}
+	
+	
+	public RecenziiModel(long id_recenzie, int notaServmed, int notaAparatura, int notaPret, int notaAspectcab,
+			int notaLocatie, String descriere, Date dataRecenzie, MediciModel medic) {
+		super();
+		this.id_recenzie = id_recenzie;
+		this.notaServmed = notaServmed;
+		this.notaAparatura = notaAparatura;
+		this.notaPret = notaPret;
+		this.notaAspectcab = notaAspectcab;
+		this.notaLocatie = notaLocatie;
+		this.descriere = descriere;
+		this.dataRecenzie = dataRecenzie;
+		this.medic = medic;
+	}
+
 
 	public long getId_recenzie() {
 		return id_recenzie;
@@ -103,28 +127,28 @@ public class RecenziiModel {
 		this.descriere = descriere;
 	}
 
-	public Timestamp getData() {
-		return data;
+	public Date getDataRecenzie() {
+		return dataRecenzie;
 	}
 
-	public void setData(Timestamp data) {
-		this.data = data;
+	public void setDataRecenzie(Date dataRecenzie) {
+		this.dataRecenzie = dataRecenzie;
 	}
 
-	public MediciModel getRecenzie() {
-		return recenzie;
+	public MediciModel getMedic() {
+		return medic;
 	}
 
-	public void setRecenzie(MediciModel recenzie) {
-		this.recenzie = recenzie;
+	public void setMedic(MediciModel medic) {
+		this.medic = medic;
 	}
 
 	@Override
 	public String toString() {
 		return "RecenziiModel [id_recenzie=" + id_recenzie + ", notaServmed=" + notaServmed + ", notaAparatura="
 				+ notaAparatura + ", notaPret=" + notaPret + ", notaAspectcab=" + notaAspectcab + ", notaLocatie="
-				+ notaLocatie + ", descriere=" + descriere + ", data=" + data + ", recenzie=" + recenzie + "]";
+				+ notaLocatie + ", descriere=" + descriere + ", dataRecenzie=" + dataRecenzie + ", medic=" + medic
+				+ "]";
 	}
-
-	
+		
 }

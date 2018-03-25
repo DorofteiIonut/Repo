@@ -6,5 +6,6 @@ import com.licenta.SpringBoot.Models.SpecializareModel.SpecializareModel;
 
 public interface SpecializareRepo extends CrudRepository<SpecializareModel, Long>{
 	SpecializareModel findByDenumireSpecializare(String denumireSpecializare);
+	
 
 }

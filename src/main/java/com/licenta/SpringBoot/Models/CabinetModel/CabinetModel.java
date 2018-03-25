@@ -1,7 +1,7 @@
 package com.licenta.SpringBoot.Models.CabinetModel;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -14,30 +14,50 @@ import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
 
 @Entity
-@Table(name="CABINET")
+@Table(name = "CABINET")
 public class CabinetModel {
-	
+
 	@Id
-	@GeneratedValue(strategy=GenerationType.IDENTITY)
-	@Column(name="IDCAB")
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "IDCAB")
 	private long idCab;
-	
-	@Column(nullable=false, name="CABADRESS")
-	private  String cabAdress;
-	
-	@Column(name="TIP")
+
+	@Column(nullable = false, name = "CABADRESS")
+	private String cabAdress;
+
+	@Column(name = "TIP")
 	private String tip;
-	
-	@Column(name="DENUMIRE")
+
+	@Column(name = "DENUMIRE")
 	private String denumire;
 	
-	@ManyToMany(cascade=CascadeType.ALL)
-	@JoinTable(name="CABINETMEDICI", joinColumns=@JoinColumn(name="ID_CABINET", referencedColumnName="IDCAB"),
-			inverseJoinColumns=@JoinColumn(name="ID_MEDIC", referencedColumnName="IDMED"))
-	private List<MediciModel> listaMedici=new ArrayList<MediciModel>();
+	@Column(name="identificator",unique=true)
+	private String identificator;
+
+	@ManyToMany(cascade = CascadeType.ALL)
+	@JsonBackReference
+	@JoinTable(name = "MEDICI_CABINET", joinColumns = @JoinColumn(name = "IDCAB", referencedColumnName = "IDCAB"), inverseJoinColumns = @JoinColumn(name = "IDMED", referencedColumnName = "IDMED"))
+	private Set<MediciModel> medici = new HashSet<MediciModel>();
+
+	
+	
+	public CabinetModel(long idCab, String cabAdress, String tip, String denumire, String identificator,
+			Set<MediciModel> medici) {
+		super();
+		this.idCab = idCab;
+		this.cabAdress = cabAdress;
+		this.tip = tip;
+		this.denumire = denumire;
+		this.identificator = identificator;
+		this.medici = medici;
+	}
+
+	public CabinetModel() {
+	}
 
 	public long getIdCab() {
 		return idCab;
@@ -71,20 +91,26 @@ public class CabinetModel {
 		this.denumire = denumire;
 	}
 
-	public List<MediciModel> getListaMedici() {
-		return listaMedici;
+	public Set<MediciModel> getMedici() {
+		return medici;
 	}
 
-	public void setListaMedici(List<MediciModel> listaMedici) {
-		this.listaMedici = listaMedici;
+	public void setMedici(Set<MediciModel> medici) {
+		this.medici = medici;
+	}
+	
+	public void setIdentificator(String argument) {
+		this.identificator=argument;
+	}
+	
+	public String getIdentificator() {
+		return identificator;
 	}
 
 	@Override
 	public String toString() {
 		return "CabinetModel [idCab=" + idCab + ", cabAdress=" + cabAdress + ", tip=" + tip + ", denumire=" + denumire
-				+ ", listaMedici=" + listaMedici + "]";
+				+ ", medici=" + medici + "]";
 	}
-
-	
 
 }

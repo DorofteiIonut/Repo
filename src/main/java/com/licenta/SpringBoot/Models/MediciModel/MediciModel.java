@@ -1,7 +1,9 @@
 package com.licenta.SpringBoot.Models.MediciModel;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -10,9 +12,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.JoinColumn;
 
 import com.licenta.SpringBoot.Models.CabinetModel.CabinetModel;
 import com.licenta.SpringBoot.Models.ProgramModel.ProgramModel;
@@ -46,185 +50,185 @@ public class MediciModel {
 	@Column(unique=true, name="FACEBOOK")
 	private String facebook;
 	
-	@Column(nullable=false, name="SPECIALIZARE")
-	private String specializare;
-	
-	@ManyToMany(mappedBy="listaMedici")
-	private List<CabinetModel> listaCabinete=new ArrayList<CabinetModel>();
+
+	@ManyToMany
+	@JoinTable(name = "MEDICI_CABINET", 
+		joinColumns = @JoinColumn(name = "IDMED", referencedColumnName = "IDMED"), 
+		inverseJoinColumns = @JoinColumn(name = "IDCAB", referencedColumnName = "IDCAB"))
+	private Set<CabinetModel> cabinete = new HashSet<CabinetModel>();
+
+	@ElementCollection
+	@Column(name="Specializare", nullable=false)
+	private List<String> specializare = new  ArrayList<>();
+
+	@OneToMany(mappedBy="medic", cascade=CascadeType.ALL)
+	private Set<ProgramModel> program = new HashSet<ProgramModel>();
 	
 	@OneToMany(mappedBy="medic", cascade=CascadeType.ALL)
-	private List<ProgramModel> orar=new ArrayList<ProgramModel>();
+	private Set<ProgramModel> servicii = new HashSet<ProgramModel>();
 	
-	@OneToMany(mappedBy="programare", cascade=CascadeType.ALL)
-	private List<ProgramariModel> programari=new ArrayList<ProgramariModel>();
-	
-	@OneToMany(mappedBy="recenzie", cascade=CascadeType.ALL)
-	private List<RecenziiModel> rec=new ArrayList<RecenziiModel>();
+	@OneToMany(mappedBy="medic", cascade=CascadeType.ALL)
+	private Set<ProgramariModel> programari = new HashSet<ProgramariModel>();
 
-	/**
-	 * @return the idMed
-	 */
+	
+	@OneToMany(mappedBy="medic", cascade=CascadeType.ALL)
+	private Set<RecenziiModel> recenzii = new HashSet<RecenziiModel>();
+
+
+	public MediciModel() {
+	}
+
+	
+
+	public MediciModel(long idMed, String nume, String prenume, List<String> numereTel, String email, String facebook,
+			Set<CabinetModel> cabinete, List<String> specializare, Set<ProgramModel> program,
+			Set<ProgramModel> servicii, Set<ProgramariModel> programari, Set<RecenziiModel> recenzii) {
+		super();
+		this.idMed = idMed;
+		this.nume = nume;
+		this.prenume = prenume;
+		this.numereTel = numereTel;
+		this.email = email;
+		this.facebook = facebook;
+		this.cabinete = cabinete;
+		this.specializare = specializare;
+		this.program = program;
+		this.servicii = servicii;
+		this.programari = programari;
+		this.recenzii = recenzii;
+	}
+
+
+
 	public long getIdMed() {
 		return idMed;
 	}
 
-	/**
-	 * @param idMed the idMed to set
-	 */
+
 	public void setIdMed(long idMed) {
 		this.idMed = idMed;
 	}
 
-	/**
-	 * @return the nume
-	 */
+
 	public String getNume() {
 		return nume;
 	}
 
-	/**
-	 * @param nume the nume to set
-	 */
+
 	public void setNume(String nume) {
 		this.nume = nume;
 	}
 
-	/**
-	 * @return the prenume
-	 */
+
+	public Set<ProgramModel> getServicii() {
+		return servicii;
+	}
+
+
+	public void setServicii(Set<ProgramModel> servicii) {
+		this.servicii = servicii;
+	}
+
+
 	public String getPrenume() {
 		return prenume;
 	}
 
-	/**
-	 * @param prenume the prenume to set
-	 */
+
 	public void setPrenume(String prenume) {
 		this.prenume = prenume;
 	}
 
-	/**
-	 * @return the numereTel
-	 */
+
 	public List<String> getNumereTel() {
 		return numereTel;
 	}
 
-	/**
-	 * @param numereTel the numereTel to set
-	 */
+
 	public void setNumereTel(List<String> numereTel) {
 		this.numereTel = numereTel;
 	}
 
-	/**
-	 * @return the email
-	 */
+
 	public String getEmail() {
 		return email;
 	}
 
-	/**
-	 * @param email the email to set
-	 */
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
 
-	/**
-	 * @return the facebook
-	 */
+
 	public String getFacebook() {
 		return facebook;
 	}
 
-	/**
-	 * @param facebook the facebook to set
-	 */
+
 	public void setFacebook(String facebook) {
 		this.facebook = facebook;
 	}
 
-	/**
-	 * @return the specializare
-	 */
-	public String getSpecializare() {
+
+	public Set<CabinetModel> getCabinete() {
+		return cabinete;
+	}
+
+
+	public void setCabinete(Set<CabinetModel> cabinete) {
+		this.cabinete = cabinete;
+	}
+
+
+	public List<String> getSpecializare() {
 		return specializare;
 	}
 
-	/**
-	 * @param specializare the specializare to set
-	 */
-	public void setSpecializare(String specializare) {
+
+	public void setSpecializare(List<String> specializare) {
 		this.specializare = specializare;
 	}
 
-	/**
-	 * @return the listaCabinete
-	 */
-	public List<CabinetModel> getListaCabinete() {
-		return listaCabinete;
+
+	public Set<ProgramModel> getProgram() {
+		return program;
 	}
 
-	/**
-	 * @param listaCabinete the listaCabinete to set
-	 */
-	public void setListaCabinete(List<CabinetModel> listaCabinete) {
-		this.listaCabinete = listaCabinete;
+
+	public void setProgram(Set<ProgramModel> program) {
+		this.program = program;
 	}
 
-	/**
-	 * @return the orar
-	 */
-	public List<ProgramModel> getOrar() {
-		return orar;
-	}
 
-	/**
-	 * @param orar the orar to set
-	 */
-	public void setOrar(List<ProgramModel> orar) {
-		this.orar = orar;
-	}
-
-	/**
-	 * @return the programari
-	 */
-	public List<ProgramariModel> getProgramari() {
+	public Set<ProgramariModel> getProgramari() {
 		return programari;
 	}
 
-	/**
-	 * @param programari the programari to set
-	 */
-	public void setProgramari(List<ProgramariModel> programari) {
+
+	public void setProgramari(Set<ProgramariModel> programari) {
 		this.programari = programari;
 	}
 
-	/**
-	 * @return the rec
-	 */
-	public List<RecenziiModel> getRec() {
-		return rec;
+
+	public Set<RecenziiModel> getRecenzii() {
+		return recenzii;
 	}
 
-	/**
-	 * @param rec the rec to set
-	 */
-	public void setRec(List<RecenziiModel> rec) {
-		this.rec = rec;
+
+	public void setRecenzii(Set<RecenziiModel> recenzii) {
+		this.recenzii = recenzii;
 	}
 
-	/* (non-Javadoc)
-	 * @see java.lang.Object#toString()
-	 */
+
 	@Override
 	public String toString() {
 		return "MediciModel [idMed=" + idMed + ", nume=" + nume + ", prenume=" + prenume + ", numereTel=" + numereTel
-				+ ", email=" + email + ", facebook=" + facebook + ", specializare=" + specializare + ", listaCabinete="
-				+ listaCabinete + ", orar=" + orar + ", programari=" + programari + ", rec=" + rec + "]";
+				+ ", email=" + email + ", facebook=" + facebook + ", cabinete=" + cabinete + ", specializare="
+				+ specializare + ", program=" + program + ", servicii=" + servicii + ", programari=" + programari
+				+ ", recenzii=" + recenzii + "]";
 	}
 
+
 	
-	
+
 }

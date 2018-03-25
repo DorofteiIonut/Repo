@@ -1,9 +1,12 @@
 package com.licenta.SpringBoot.Controllers.MedicController;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,6 +28,7 @@ public class MedicController {
 		System.out.println("addMedic:"+ medicModel.toString());
 		try {
 		medicServices.addMedic(medicModel);
+	
 		return new ResponseEntity<Void>(HttpStatus.CREATED);
 		} catch(Exception e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -42,8 +46,15 @@ public class MedicController {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
 		}
 	}
-	
-	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value="/getListaMedici/{specializare}", method=RequestMethod.GET)
+	public List<MediciModel> getListaMedic(@PathVariable("specializare") String specializare){
+		System.out.println("getListaMedici:"+specializare);
+		List<MediciModel>medicList=medicServices.listaMedici(specializare);
+
+		return medicList;
+
+	}
 	
 	
 

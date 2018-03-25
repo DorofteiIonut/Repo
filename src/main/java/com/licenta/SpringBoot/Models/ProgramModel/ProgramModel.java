@@ -1,6 +1,7 @@
 package com.licenta.SpringBoot.Models.ProgramModel;
 
-import java.sql.Timestamp;
+
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,7 +11,10 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
 
 
@@ -27,14 +31,31 @@ public class ProgramModel {
 	private String zi;
 	
 	@Column(nullable=false, name="ORASTART")
-	private Timestamp oraStart;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date oraStart;
 	
 	@Column(nullable=false, name="ORAFINAL")
-	private Timestamp oraFinal;
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date oraFinal;
 	
 	@ManyToOne
 	@JoinColumn(name="IDMED")
+	@JsonBackReference
 	private MediciModel medic;
+
+	public ProgramModel() {
+	}
+	
+	public ProgramModel(long id_program, String zi, Date oraStart, Date oraFinal, MediciModel medic) {
+		super();
+		this.id_program = id_program;
+		this.zi = zi;
+		this.oraStart = oraStart;
+		this.oraFinal = oraFinal;
+		this.medic = medic;
+	}
+
+
 
 	public long getId_program() {
 		return id_program;
@@ -52,19 +73,19 @@ public class ProgramModel {
 		this.zi = zi;
 	}
 
-	public Timestamp getOraStart() {
+	public Date getOraStart() {
 		return oraStart;
 	}
 
-	public void setOraStart(Timestamp oraStart) {
+	public void setOraStart(Date oraStart) {
 		this.oraStart = oraStart;
 	}
 
-	public Timestamp getOraFinal() {
+	public Date getOraFinal() {
 		return oraFinal;
 	}
 
-	public void setOraFinal(Timestamp oraFinal) {
+	public void setOraFinal(Date oraFinal) {
 		this.oraFinal = oraFinal;
 	}
 
@@ -82,7 +103,4 @@ public class ProgramModel {
 				+ oraFinal + ", medic=" + medic + "]";
 	}
 
-	
-	
-	
-	}
+}

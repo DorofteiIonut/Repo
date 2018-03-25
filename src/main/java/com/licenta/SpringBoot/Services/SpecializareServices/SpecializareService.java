@@ -1,5 +1,7 @@
 package com.licenta.SpringBoot.Services.SpecializareServices;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,5 +23,9 @@ public class SpecializareService {
 		}
 	}
 	
+	public List<SpecializareModel> getSpecializareList (){
+		List<SpecializareModel> listaSpecializari= (List<SpecializareModel>) specializare.findAll();
+		return listaSpecializari;
+	}
 
 }
