@@ -3,7 +3,8 @@ import loginConstants from "../Constants";
 export const initialState = {
    inProgress:false,
    token:null,
-   error:null
+   error:null,
+   username:null,
 };
  
 export default function loginReducer(state = initialState, action) {
@@ -32,6 +33,13 @@ export default function loginReducer(state = initialState, action) {
                error:action.payload,
             };
             break;
+           }
+           case loginConstants.ADD_USERNAME:{
+               state={
+                   ...state,
+                   username:action.payload,
+               };
+               break;
            }
     }
     return state;

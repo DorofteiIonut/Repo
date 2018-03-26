@@ -22,8 +22,6 @@ class TextFieldGroup extends Component {
   }
 
   render() {
-
-
     return (
       <div className="formContainerDiv">
         <form>

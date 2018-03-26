@@ -21,6 +21,7 @@ export default function loginUser(username, password) {
             throw new Error(json.error);
         }
         dispatch({ type: loginConstants.LOGIN_SUCCES,payload:json.Token})
+        dispatch({type:loginConstants.ADD_USERNAME,payload:username})
       } catch (err) {
         console.log("Error --:" + err.message);
         dispatch({ type: loginConstants.LOGIN_FAILURE,payload:err.message})

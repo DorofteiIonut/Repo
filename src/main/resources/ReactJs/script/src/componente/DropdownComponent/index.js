@@ -19,6 +19,18 @@ class Dropdown extends Component {
         <a className="textlistaMedici" href="/medici">
         <p>General</p>
         </a>
+        <a className="textlistaMedici" href="/medici">
+        <p>Chirurg</p>
+        </a>
+        <a className="textlistaMedici" href="/medici">
+        <p>Plastician</p>
+        </a>
+        <a className="textlistaMedici" href="/medici">
+        <p>Tehnician dentar</p>
+        </a>
+        <a className="textlistaMedici" href="/medici">
+        <p>altceva</p>
+        </a>
       </div>
     );
   }
