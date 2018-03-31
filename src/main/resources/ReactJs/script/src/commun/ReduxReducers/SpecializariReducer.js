@@ -3,7 +3,8 @@ import appConstants from '../Constants';
 export const initialState={
     inProgress:false,
     error:null,
-    specializareList: null
+    specializareList: null,
+    specializareSelectata:null
 }
 
 export default function specializariReducer(state=initialState,action){
@@ -30,6 +31,14 @@ export default function specializariReducer(state=initialState,action){
                 ...state,
                 inProgress:false,
                 error:action.payload
+            };
+            break;
+        }
+        case appConstants.SET_SPECIALIZARE:{
+            state={
+                ...state,
+                inProgress:true,
+                specializareSelectata:action.payload,
             };
             break;
         }

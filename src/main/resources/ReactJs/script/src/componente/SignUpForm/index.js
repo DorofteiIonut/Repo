@@ -179,9 +179,9 @@ class SignUpForm extends Component {
           email:this.state.email,
         })
       });
-      const json = await resp.json();
-      if(json==null || resp.status!==200){
-          throw new Error(json.error);
+      
+      if(resp.status!==200){
+          throw new Error("signup error");
       }
       
     } catch (err) {

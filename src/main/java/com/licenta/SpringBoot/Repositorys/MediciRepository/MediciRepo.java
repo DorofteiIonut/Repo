@@ -8,6 +8,6 @@ import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
 
 public interface MediciRepo extends CrudRepository<MediciModel, Long>{
 	MediciModel findByEmail(String email);
-	List<MediciModel> findBySpecializare( List<String> specializare);
-
+	List<MediciModel> findBySpecializare( String specializare);
+	
 }

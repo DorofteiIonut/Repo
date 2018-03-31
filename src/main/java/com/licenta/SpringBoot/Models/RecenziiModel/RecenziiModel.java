@@ -142,6 +142,10 @@ public class RecenziiModel {
 	public void setMedic(MediciModel medic) {
 		this.medic = medic;
 	}
+	
+	public float getMedie() {
+		return (float) ((notaAparatura+notaAspectcab+notaLocatie+notaPret+notaServmed)/5.0);
+	}
 
 	@Override
 	public String toString() {

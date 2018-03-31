@@ -8,7 +8,7 @@ import {Link} from "react-router-dom";
 class Header extends Component {
   constructor(props) {
     super(props);
-
+  
     this.state = {
       drop: false
     };
@@ -28,12 +28,9 @@ class Header extends Component {
               {!this.props.isWelcomePage && !this.props.isLoginPage && !this.props.isSignUp &&(
                 <li>
                  
-                  <Link to={"/medici"}>
-                    <div className="divList">
-                      
+                  <Link to={""}>
                       <p onClick={() => this.changeDropState()}> Medici</p>
-                      {this.state.drop && <Dropdown />}
-                    </div>
+                      {this.state.drop && <Dropdown  />}
                   </Link>
                 </li>
               )}

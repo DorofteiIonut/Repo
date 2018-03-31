@@ -99,7 +99,7 @@ async _onLoginPress() {
       await this.props.loginUser(this.state.username,this.state.password);
       
       if(this.props.authInfo.token!==null){
-        this.props.history.push('/medici');
+        this.props.history.push('/');
       }
     } catch (error) {
       console.log(error.message);
