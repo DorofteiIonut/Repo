@@ -3,6 +3,7 @@ package com.licenta.SpringBoot.ResponseEntity;
 import java.util.List;
 
 public class SpecializareMedici {
+		private long id;
 		private String nume;
 		private String prenume;
 		private List<String> adrese;
@@ -38,6 +39,13 @@ public class SpecializareMedici {
 		public void setMedieRecenzie(float medieRecenzie) {
 			this.medieRecenzie = medieRecenzie;
 		}
+		
+		public long getId() {
+			return id;
+		}
+		public void setId(long id) {
+			this.id = id;
+		}
 		public SpecializareMedici(String nume, String prenume, List<String> adrese, List<String> numereTel,
 				float medieRecenzie) {
 			super();
@@ -52,9 +60,8 @@ public class SpecializareMedici {
 		}
 		@Override
 		public String toString() {
-			return "SpecializareMedici [nume=" + nume + ", prenume=" + prenume + ", adrese=" + adrese + ", numereTel="
-					+ numereTel + ", medieRecenzie=" + medieRecenzie + "]";
+			return "SpecializareMedici [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", adrese=" + adrese
+					+ ", numereTel=" + numereTel + ", medieRecenzie=" + medieRecenzie + "]";
 		}
-		
 		
 	}

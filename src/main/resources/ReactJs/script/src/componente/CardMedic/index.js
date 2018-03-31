@@ -3,16 +3,20 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 import "./styles.css";
 import Rating from "react-rating";
+import {withRouter} from 'react-router-dom';
+
 
 class CardMedic extends Component {
+
+
   render() {
     return (
-      <div className="divCard">
+      <div className="divCardMed">
         <div className="divImagine">
-          <img src={require("../../assets/logo.jpg")} className="imgStyle" />
+          <img src={require("../../assets/avatar.png")} className="imgStyle" />
 
-          <Rating
-            placeholderRating={2.7}
+          <Rating 
+            placeholderRating={this.props.rating}
             emptySymbol={
               <img
                 src={require("../../assets/star-grey.png")}
@@ -36,14 +40,38 @@ class CardMedic extends Component {
         </div>
 
         <div className="divDate">
-          <p>Nume: Doctor </p>
-          <p>Prenume: Plusica </p>
-          <p>Adresa: Suceava </p>
-          <p>Nr. Telefon:07432465432 </p>
+          <p>Nume:{this.props.numeMedic} </p>
+          <p>Prenume: {this.props.prenumeMedic} </p>
+          <p>Adresa: {this.renderAdrese()} </p>
+          <p>Nr. Telefon:{this.renderNrTel()} </p>
         </div>
+        <button onClick={()=>this.onClick()} className="buttonProfil">
+        
+          Vezi detalii
+          </button>
       </div>
     );
   }
+
+  onClick(){
+    this.props.history.push('/medic');
+  }
+renderNrTel(){
+  let listaNr=[];
+  let numere=this.props.nrTel.length;
+  for(let i=0;i<numere;i++){
+  listaNr.push(<p>{this.props.nrTel[i]}</p>)
+  }
+  return listaNr;
 }
 
-export default CardMedic;
+renderAdrese(){
+  let listaAdrese=[];
+  for(let i=0;i<this.props.adreseMedic.length;i++){
+      listaAdrese.push(<p>{this.props.adreseMedic[i]}</p>)
+  }
+  return listaAdrese;
+}
+}
+
+export default   (withRouter(CardMedic))

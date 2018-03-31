@@ -10,9 +10,11 @@ import org.springframework.stereotype.Service;
 
 import com.licenta.SpringBoot.Models.CabinetModel.CabinetModel;
 import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
+import com.licenta.SpringBoot.Models.ProgramModel.ProgramModel;
 import com.licenta.SpringBoot.Models.RecenziiModel.RecenziiModel;
 import com.licenta.SpringBoot.Repositorys.CabinetRepository.CabinetRepo;
 import com.licenta.SpringBoot.Repositorys.MediciRepository.MediciRepo;
+import com.licenta.SpringBoot.ResponseEntity.ProfilMedic;
 import com.licenta.SpringBoot.ResponseEntity.SpecializareMedici;
 import com.licenta.SpringBoot.Services.CabinetServices.CabinetServices;
 import com.licenta.SpringBoot.Services.SpecializareServices.SpecializareService;
@@ -58,23 +60,48 @@ public class MediciServices {
 		mediciRepo.delete(med);
 	}
 	
+	public ProfilMedic getMedic(long id) {
+		ProfilMedic profilMedic=new ProfilMedic();
+		MediciModel obiect=mediciRepo.findOne(id);
+		profilMedic.setId(obiect.getIdMed());
+		profilMedic.setNume(obiect.getNume());
+		profilMedic.setPrenume(obiect.getPrenume());
+		profilMedic.setEmail(obiect.getEmail());
+		profilMedic.setFacebook(obiect.getFacebook());
+		profilMedic.setNrTel(obiect.getNumereTel());
+		profilMedic.setSpecializare(obiect.getSpecializare());
+		
+		Set<CabinetModel> listaCabinete=obiect.getCabinete();
+		List<String> lista=new ArrayList<>();
+		for(CabinetModel cabinete:listaCabinete) {
+			lista.add(cabinete.getDenumire()+" "+cabinete.getCabAdress());
+		
+		}
+		profilMedic.setAdresaCab(lista);
+		
+		Set<ProgramModel> orar=obiect.getProgram();
+		List<String> listaOrar=new ArrayList<>();
+		for(ProgramModel programLucru:orar) {
+			listaOrar.add(programLucru.getZi()+" "+programLucru.getOraStart()+"-"+programLucru.getOraFinal());
+		}
+		profilMedic.setProgram(listaOrar);
+		
+		return profilMedic;
+	}
+	
 	public List<SpecializareMedici> selectMedici(String specializare) { 
 		List<SpecializareMedici> listaMedici=new ArrayList<>();
 		List<MediciModel> listaSpecializareMedic=mediciRepo.findBySpecializare(specializare);
 		for(MediciModel element:listaSpecializareMedic) {
 			SpecializareMedici obiect=new SpecializareMedici();
+			obiect.setId(element.getIdMed());
 			obiect.setNume(element.getNume());
 			obiect.setPrenume(element.getPrenume());
 			obiect.setNumereTel(element.getNumereTel());
-			
-			System.out.println("nume:"+element.getNume());
-			System.out.println("prenume:"+element.getPrenume());
-			System.out.println("nume:"+element.getNumereTel());
 			List<String> adrese=new ArrayList<>();
 			Set<CabinetModel> listaAdresaCabinet= element.getCabinete();
 			for(CabinetModel cabinet:listaAdresaCabinet) {
 				adrese.add(cabinet.getCabAdress());
-				System.out.println("adresa:"+cabinet.getCabAdress());
 			}
 			obiect.setAdrese(adrese);
 			
@@ -91,25 +118,4 @@ public class MediciServices {
 		}
 		return listaMedici;
 	}
-
-	public List<MediciModel> listaMedici(String specializare) {
-		List<String> listaSpecializare = new  ArrayList<>();
-		listaSpecializare.add(specializare);
-		List<MediciModel> medicList =  mediciRepo.findBySpecializare(specializare);
-		Set<CabinetModel> cabinetModel=new HashSet<>();
-		for(MediciModel model: medicList) {
-			MediciModel mediciResponse=new MediciModel();
-			System.out.println(model.getIdMed()+"  " + model.getNume()+"   " +model.getPrenume());
-			System.out.println(model.getEmail()+"  " + model.getFacebook()+"   " +model.getNumereTel());
-			cabinetModel=model.getCabinete();
-		}
-		System.out.println(cabinetModel.size());
-		for(CabinetModel model: cabinetModel) {
-			System.out.println(model.getCabAdress());
-		}
-		return null;
-	}
-	
-	
-
 }

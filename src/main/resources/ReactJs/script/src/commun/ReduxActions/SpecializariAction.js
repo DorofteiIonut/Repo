@@ -8,7 +8,7 @@ export default function specializareList(token) {
       const resp = await fetch(getSpecializariUrl.getSpecializariUrl, {
         method: "GET",
         headers: {
-            "Authorization":token,
+            "Authorization":"eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJCaWFuY2EiLCJleHAiOjE1MjI1MjExNzV9.WRsHPkVQj5ks6tfJWasyv3rNrCq362dD8cLVgIkVMEFxp-QCxOtN3t-orItW7rvpKnAa-Oon7_Hb6y0xCUwFag",
             "Content-Type": "application/json"
         },
       });

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
+import com.licenta.SpringBoot.ResponseEntity.ProfilMedic;
 import com.licenta.SpringBoot.ResponseEntity.SpecializareMedici;
 import com.licenta.SpringBoot.Services.MediciServices.MediciServices;
 
@@ -54,5 +55,9 @@ public class MedicController {
 		System.out.println("getListaMedici:" + specializare);
 		return medicServices.selectMedici(specializare);
 	}
-
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/getProfilMedic/{id}", method = RequestMethod.GET)
+	public ResponseEntity<ProfilMedic> getProfilMedic(@PathVariable("id") long id) {
+		return new ResponseEntity<ProfilMedic>(medicServices.getMedic(id),HttpStatus.OK);
+	}
 }
