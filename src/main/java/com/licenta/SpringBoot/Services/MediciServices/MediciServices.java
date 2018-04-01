@@ -79,6 +79,18 @@ public class MediciServices {
 		}
 		profilMedic.setAdresaCab(lista);
 		
+		Set<RecenziiModel> listaRecenzii=obiect.getRecenzii();
+		int nrRecenzii=listaRecenzii.size();
+		float sumaP=0,sumaA=0, sumaS=0;
+		for(RecenziiModel recenzii:listaRecenzii) {
+			sumaP+=recenzii.getNotaPret();
+			sumaA+=recenzii.getNotaAparatura();
+			sumaS+=recenzii.getNotaServmed();
+		}
+		profilMedic.setMediePret(sumaP==0?0:sumaP/nrRecenzii);
+		profilMedic.setMedieAparatura(sumaA==0?0:sumaA/nrRecenzii);
+		profilMedic.setMedieServMedicale(sumaS==0?0:sumaS/nrRecenzii);
+	
 		Set<ProgramModel> orar=obiect.getProgram();
 		List<String> listaOrar=new ArrayList<>();
 		for(ProgramModel programLucru:orar) {

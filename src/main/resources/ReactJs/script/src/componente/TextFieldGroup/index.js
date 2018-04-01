@@ -69,7 +69,7 @@ class TextFieldGroup extends Component {
           }
           {this.props.authInfo.inProgress &&
           <div>
-          <img src={require("../../assets/Load.gif")} className="styleGif"/>
+          <img src={require("../../assets/Load.gif")} className="styleGif" alt="load"/>
             </div>}
         </form>
       </div>

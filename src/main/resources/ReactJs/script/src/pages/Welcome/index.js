@@ -8,9 +8,6 @@ import specializareList from "../../commun/ReduxActions/SpecializariAction";
 import { bindActionCreators } from "redux";
 
 class Welcome extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   async componentWillMount() {
     await this.loadData();

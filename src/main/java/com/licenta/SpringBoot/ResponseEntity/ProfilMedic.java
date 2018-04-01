@@ -12,6 +12,10 @@ public class ProfilMedic {
 	private List<String> nrTel;
 	private List<String> adresaCab;
 	private List<String> program;
+	private float mediePret;
+	private float medieServMedicale;
+	private float medieAparatura;
+	
 	public long getId() {
 		return id;
 	}
@@ -66,12 +70,33 @@ public class ProfilMedic {
 	public void setProgram(List<String> program) {
 		this.program = program;
 	}
+	
+	public float getMediePret() {
+		return mediePret;
+	}
+	public void setMediePret(float mediePret) {
+		this.mediePret = mediePret;
+	}
+	public float getMedieServMedicale() {
+		return medieServMedicale;
+	}
+	public void setMedieServMedicale(float medieServMedicale) {
+		this.medieServMedicale = medieServMedicale;
+	}
+	public float getMedieAparatura() {
+		return medieAparatura;
+	}
+	public void setMedieAparatura(float medieAparatura) {
+		this.medieAparatura = medieAparatura;
+	}
 	@Override
 	public String toString() {
 		return "ProfilMedic [id=" + id + ", nume=" + nume + ", prenume=" + prenume + ", specializare=" + specializare
 				+ ", facebook=" + facebook + ", email=" + email + ", nrTel=" + nrTel + ", adresaCab=" + adresaCab
-				+ ", program=" + program + "]";
+				+ ", program=" + program + ", mediePret=" + mediePret + ", medieServMedicale=" + medieServMedicale
+				+ ", medieAparatura=" + medieAparatura + "]";
 	}
+	
 	
 	
 }

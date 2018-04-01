@@ -25,6 +25,9 @@ public class RecenziiModel {
 	@Column(name="ID_RECENZIE")
 	private long id_recenzie;
 	
+	@Column(nullable=false, name="USERNAME")
+	private String username;
+	
 	@Column(nullable=false, name="NOTASERVMED")
 	private int notaServmed;
 	
@@ -56,10 +59,12 @@ public class RecenziiModel {
 	}
 	
 	
-	public RecenziiModel(long id_recenzie, int notaServmed, int notaAparatura, int notaPret, int notaAspectcab,
-			int notaLocatie, String descriere, Date dataRecenzie, MediciModel medic) {
+	
+	public RecenziiModel(long id_recenzie, String username, int notaServmed, int notaAparatura, int notaPret,
+			int notaAspectcab, int notaLocatie, String descriere, Date dataRecenzie, MediciModel medic) {
 		super();
 		this.id_recenzie = id_recenzie;
+		this.username = username;
 		this.notaServmed = notaServmed;
 		this.notaAparatura = notaAparatura;
 		this.notaPret = notaPret;
@@ -69,6 +74,7 @@ public class RecenziiModel {
 		this.dataRecenzie = dataRecenzie;
 		this.medic = medic;
 	}
+
 
 
 	public long getId_recenzie() {
@@ -146,13 +152,25 @@ public class RecenziiModel {
 	public float getMedie() {
 		return (float) ((notaAparatura+notaAspectcab+notaLocatie+notaPret+notaServmed)/5.0);
 	}
+	
+
+	public String getUsername() {
+		return username;
+	}
+
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
 
 	@Override
 	public String toString() {
-		return "RecenziiModel [id_recenzie=" + id_recenzie + ", notaServmed=" + notaServmed + ", notaAparatura="
-				+ notaAparatura + ", notaPret=" + notaPret + ", notaAspectcab=" + notaAspectcab + ", notaLocatie="
-				+ notaLocatie + ", descriere=" + descriere + ", dataRecenzie=" + dataRecenzie + ", medic=" + medic
-				+ "]";
+		return "RecenziiModel [id_recenzie=" + id_recenzie + ", username=" + username + ", notaServmed=" + notaServmed
+				+ ", notaAparatura=" + notaAparatura + ", notaPret=" + notaPret + ", notaAspectcab=" + notaAspectcab
+				+ ", notaLocatie=" + notaLocatie + ", descriere=" + descriere + ", dataRecenzie=" + dataRecenzie
+				+ ", medic=" + medic + "]";
 	}
 		
 }
