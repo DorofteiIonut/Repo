@@ -1,5 +1,5 @@
 .divCard{
-    background-color: aqua;
+    background-color:rgba(255,255,0,0.3);
     width:60%;
     height: 35%;
     margin: auto;
@@ -10,6 +10,8 @@
     height: 50%;
     margin-left: 2%;
     float: left;
+    background-color:rgba(255,255,0,0.3);
+
 }
 .imgStyle{
     width: 100%;

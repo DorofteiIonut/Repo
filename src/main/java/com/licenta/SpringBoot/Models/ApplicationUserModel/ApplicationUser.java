@@ -14,10 +14,26 @@ public class ApplicationUser {
 	private long id;
 	@Column(nullable=false, unique=true)
 	private String username;
-	@Column(nullable=false, unique=true)
+	@Column(nullable=false)
 	private String password;
+	@Column(nullable=false, unique=true)
+	private String email;
+	@Column(name="rol")
+	private String rol;
 	
 	
+	public String getRol() {
+		return rol;
+	}
+	public void setRol(String rol) {
+		this.rol = rol;
+	}
+	public String getEmail() {
+		return email;
+	}
+	public void setEmail(String email) {
+		this.email = email;
+	}
 	public long getId() {
 		return id;
 	}
@@ -40,7 +56,7 @@ public class ApplicationUser {
 	
 	@Override
 	public String toString() {
-		return "ApplicationUser [id=" + id + ", username=" + username + ", password=" + password + "]";
+		return "ApplicationUser [id=" + id + ", username=" + username + ", password=" + password + ", email="+ email+", rol="+rol+"]";
 	}
 	
 	

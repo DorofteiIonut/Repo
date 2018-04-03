@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import './styles.css';
+import Rating from "react-rating";
 
 class CardCabinet extends Component {
     
@@ -10,8 +11,30 @@ class CardCabinet extends Component {
             <div className="divCard">
                 <div className="divImgCabinet">
                 <img src={require("../../assets/logo.jpg")} className="imgStyle" />
-                <p className="rating">Rating:8,35</p>
-                    </div>
+
+                <Rating
+            placeholderRating={3.88}
+            emptySymbol={
+              <img
+                src={require("../../assets/star-grey.png")}
+                className="icon"
+              />
+            }
+            placeholderSymbol={
+              <img
+                src={require("../../assets/star-red.png")}
+                className="icon"
+              />
+            }
+            fullSymbol={
+              <img
+                src={require("../../assets/star-yellow.png")}
+                className="icon"
+              />
+            }
+            readonly={true}
+          />
+          </div>
                     
                     <div className="divDate">
                         <p>Orar: 07:30-16:00 </p>
@@ -20,6 +43,7 @@ class CardCabinet extends Component {
                         <p>Nr. Telefon:07432465432 </p>
                         <p>Tip cabinet: Privat </p>
                     </div>
+            
             </div>
         );
       }

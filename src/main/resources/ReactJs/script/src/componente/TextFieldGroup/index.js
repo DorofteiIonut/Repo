@@ -5,7 +5,9 @@ import { Button } from "react-bootstrap";
 import "./styles.css";
 import MesajValidare from "../MesajValidare/index";
 import { connect } from 'react-redux'
-import {loginUser} from "../../commun/ReduxActions/LoginReduxAction";
+import loginUser from "../../commun/ReduxActions/LoginReduxAction";
+import {bindActionCreators} from 'redux'; 
+import {withRouter} from 'react-router-dom';
 
 class TextFieldGroup extends Component {
   constructor(props) {
@@ -55,6 +57,7 @@ class TextFieldGroup extends Component {
               }
             />
           </div>
+          {!this.props.authInfo.inProgress && 
           <Button
             bsStyle="info"
             bsSize="lg"
@@ -63,6 +66,11 @@ class TextFieldGroup extends Component {
           >
             Login
           </Button>
+          }
+          {this.props.authInfo.inProgress &&
+          <div>
+          <img src={require("../../assets/Load.gif")} className="styleGif"/>
+            </div>}
         </form>
       </div>
     );
@@ -82,49 +90,31 @@ class TextFieldGroup extends Component {
     }
   }
 
-  _onLoginPress() {
+async _onLoginPress() {
+   
     try {
       if (!this._validation()) {
         throw new Error("Try again!");
       }
-      this._callApi();
+      await this.props.loginUser(this.state.username,this.state.password);
+      
+      if(this.props.authInfo.token!==null){
+        this.props.history.push('/');
+      }
     } catch (error) {
       console.log(error.message);
     }
   }
-
-  // async _callApi() {
-  //   const url = "http://localhost:8080/login";
-
-  //   try {
-  //     const resp = await fetch(url, {
-  //       method: "POST",
-  //       headers: {
-  //         Accept: "application/json",
-  //         "Content-Type": "application/json"
-  //       },
-  //       body: JSON.stringify({
-  //         userName: this.state.username,
-  //         password: this.state.password,
-  //         role: ""
-  //       })
-  //     });
-  //     const jS = await resp.json();
-  //     console.log(JSON.stringify(jS));
-  //   } catch (err) {
-  //     console.log("Error:" + err.message);
-  //   }
-  // }
 }
 
 function mapStateToProps(state){
   return {
-    authInfo:state.loginReducer
+    authInfo:state.authReducer
   };
 }
 
 function mapDispatchToProps(dispatch) {
-  return { actionsLogin: loginUser(username, password) }
+  return bindActionCreators({ loginUser:(username,password)=>loginUser(username,password)},dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(TextFieldGroup)
+export default connect(mapStateToProps,mapDispatchToProps) (withRouter(TextFieldGroup))
