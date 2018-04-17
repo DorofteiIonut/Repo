@@ -20,10 +20,8 @@ public class CabinetServices {
 		if(listaCabinete.isEmpty()) {
 		CabinetModel cabinetToAdd=newCabinet;
 		cabinetToAdd.setIdentificator(newCabinet.getCabAdress()+newCabinet.getDenumire()+newCabinet.getTip());
-		System.out.println(cabinetToAdd.getIdentificator());
 		cabinetRepo.save(cabinetToAdd);
 		cabineteMedic=(cabinetRepo.findByIdentificator(cabinetToAdd.getIdentificator()));
-		System.out.println(cabineteMedic.toString());
 		}
 		return cabineteMedic;
 	} 

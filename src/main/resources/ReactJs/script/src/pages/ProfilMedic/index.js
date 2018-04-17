@@ -11,7 +11,8 @@ import medicProfil from "../../commun/ReduxActions/ProfilMedicAction"
 class ProfilMedic extends Component {
 
  async componentWillMount(){
-  await this.props.medicProfil(this.props.authInfo.token,13);
+  console.log("ce avem in redux:"+JSON.stringify( this.props.location.state.detail));
+  await this.props.medicProfil(this.props.authInfo.token,this.props.location.state.detail);
   }   
 
   render() {
@@ -19,8 +20,6 @@ class ProfilMedic extends Component {
       return <div></div>
     }
     else{
-      console.log("ce avem in redux:"+JSON.stringify(this.props.profilMedic));
-
     return (
       <div>
         <div>
@@ -105,7 +104,7 @@ class ProfilMedic extends Component {
                 readonly={true}
               />
             </div>
-
+               
             <div className="stilChenar">
               <p> Specializare:{this.props.profilMedic.dateMedic.specializare} </p>
               <p> Cabinet: {this.props.profilMedic.dateMedic.adresaCab} </p>
@@ -114,9 +113,19 @@ class ProfilMedic extends Component {
               <p> Telefon: {this.renderNrTel()}</p>
               <p> Facebook: {this.props.profilMedic.dateMedic.facebook} </p>
             </div>
+           
+          </div>
+          <div className="divBtn">
+          <button onClick={()=>this.onClick(this.props.location.state.detail)} className="butonRezervare">
+          Rezervare
+          </button>
+
+          <button onClick={()=>this.onClick(this.props.location.state.detail)} className="butonRecenzie">
+          Adauga recenzie
+          </button>
+          </div>
           </div>
         </div>
-      </div>
     );
   }
   }
@@ -128,6 +137,12 @@ class ProfilMedic extends Component {
       );
     }
     return list;
+  }
+  onClick(id){
+    this.props.history.push({
+      pathname: '/programari',
+      state: { idRezervare: id }
+    }) 
   }
 }
 function mapStateToProps(state) {

@@ -14,9 +14,7 @@ class Medici extends Component {
   }
 
   async componentWillMount() {
-    console.log("--Will Mount");
     await this.loadData();
-    console.log("--Redux:"+JSON.stringify(this.props.listaMedici))
   }
 
   render() {
@@ -28,7 +26,7 @@ class Medici extends Component {
         </div>
       );
     } else {
-      //Trebuie trata situatia 
+      //Trebuie tratata situatia 
       return (
         <div>
           <img src={require("../../assets/Load.gif")} className="styleGif" />
@@ -51,6 +49,7 @@ class Medici extends Component {
           prenumeMedic={this.props.listaMedici.listaMedici[i].prenume}
           nrTel={this.props.listaMedici.listaMedici[i].numereTel}
           adreseMedic={this.props.listaMedici.listaMedici[i].adrese}
+          idMedic={this.props.listaMedici.listaMedici[i].id}
         />
       );
     }

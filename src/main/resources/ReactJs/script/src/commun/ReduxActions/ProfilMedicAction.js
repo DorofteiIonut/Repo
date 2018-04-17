@@ -5,7 +5,7 @@ export default function medicProfil(token, id) {
   return async function(dispach) {
     dispach({ type: getProfilMedic.GET_PROFILMEDIC_IN_PROGRESS });
     try {
-      const resp = await fetch(Api.getProfilMedic + 13, {
+      const resp = await fetch(Api.getProfilMedic + id, {
         method: "GET",
         headers: {
           Authorization:token,

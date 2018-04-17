@@ -6,8 +6,11 @@ import ProgramariForm from '../../componente/ProgramariForm/index';
 import './styles.css';
 
 class Programari extends Component {
-    
-      render() {
+    componentDidMount(){
+        
+    }
+
+     render() {
         return (
             <div className="divProgramari">
                 <Header isLoginPage={true}/>

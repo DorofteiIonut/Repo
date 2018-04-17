@@ -8,7 +8,6 @@ import {withRouter} from 'react-router-dom';
 
 class CardMedic extends Component {
 
-
   render() {
     return (
       <div className="divCardMed">
@@ -45,7 +44,7 @@ class CardMedic extends Component {
           <p>Adresa: {this.renderAdrese()} </p>
           <p>Nr. Telefon:{this.renderNrTel()} </p>
         </div>
-        <button onClick={()=>this.onClick()} className="buttonProfil">
+        <button onClick={()=>this.onClick(this.props.idMedic)} className="buttonProfil">
         
           Vezi detalii
           </button>
@@ -53,9 +52,12 @@ class CardMedic extends Component {
     );
   }
 
-  onClick(){
-    this.props.history.push('/medic');
-  }
+  onClick(id){
+    this.props.history.push({
+      pathname: '/medic',
+      state: { detail: id }
+    }) 
+   }
 renderNrTel(){
   let listaNr=[];
   let numere=this.props.nrTel.length;

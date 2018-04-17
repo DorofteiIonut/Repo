@@ -9,17 +9,18 @@
 .divCartonas{
     width: 80%;
     height: 60%;
+    border-radius: 4%;
     background-color: rgba(71, 30, 95, 0.377);
     margin-left: 10%;
-    margin-top: 5%;
+    margin-top: 1%;
     margin-right: 10%;
     
 }
 .p{
     text-align: center;
-    color:black;
-    size: 5%;
-    margin-top: 4%;
+    color:white;
+    size: 25%;
+    margin-top: 5%;
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 
 }
@@ -32,7 +33,11 @@
     margin-left: 5%;
     margin-top: 2.5%;
     width: 60%;
-    background-color: brown;
+    background-color: rgba(39, 4, 59, 0.288);
+    size: 5%;
+    color:white;
+    padding: 3%;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 .styleRating{
     float: left;
@@ -46,4 +51,32 @@
     font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
     size: 10px;
     color: white;
+}
+.butonRezervare{
+    background-color: rgba(39, 95, 40, 0.363);
+     border: none;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: aliceblue;
+    font-size: 20px;
+    cursor: pointer;
+    float: left;
+    margin-left: 40%;
+    margin-top: 2%;
+    
+}
+.butonRecenzie{
+    background-color: rgba(39, 95, 40, 0.363);
+     border: none;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: aliceblue;
+    font-size: 20px;
+    cursor: pointer;
+    float: left;
+   margin-top: 2%;
+   margin-left: 2%;
+    
+    
+}
+.divBtn{
+    align-items: center;
 }

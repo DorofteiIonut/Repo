@@ -3,6 +3,7 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap-theme.css';
 import './styles.css';
 import Rating from "react-rating";
+import {withRouter} from 'react-router-dom';
 
 class CardCabinet extends Component {
     
@@ -35,7 +36,6 @@ class CardCabinet extends Component {
             readonly={true}
           />
           </div>
-                    
                     <div className="divDate">
                         <p>Orar: 07:30-16:00 </p>
                         <p>Denumire: Policlinica</p>
@@ -43,10 +43,20 @@ class CardCabinet extends Component {
                         <p>Nr. Telefon:07432465432 </p>
                         <p>Tip cabinet: Privat </p>
                     </div>
-            
+                    <button onClick={()=>this.onClick(this.props.idCabinet)} className="buttonDetalii">
+        
+        Vezi detalii
+        </button>
             </div>
         );
       }
+      onClick(id){
+        this.props.history.push({
+          pathname: '/cabinet',
+          state: { detail: id }
+        }) 
     }
     
-    export default CardCabinet;
+     }
+    
+    export default (withRouter(CardCabinet))
