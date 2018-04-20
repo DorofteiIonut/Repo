@@ -22,13 +22,29 @@ class SignUpForm extends Component {
       passErrorMsg:"Camp invalid",
       confpassErrMsg:"Camp invalid",
       emailErrMsg:"Camp invalid",
-      userErrMsg:"Introduceti numele de utilizator"
+      userErrMsg:"Introduceti numele de utilizator",
+      signUpError:false,
+      signUpSuccess:false,
     };
   }
 
   render() {
+    if(this.state.signUpSuccess){
+      return(
+          <div className="divSuccess" >
+               <h className="stilSucces1">Felicitari! </h><br></br>
+               <h className="stilSucces2">Esti inregistrat ca utilizator!</h><br></br>
+               <h className="stilSucces3">Iti multumim!:)</h>
+
+              </div>
+      )
+  }
     return (
       <div className="formSignupContainerDiv">
+      <h className="titleStyles"> Sign Up</h>
+      {this.state.signUpError&&(
+      <p className="stilEroare">Inregistrarea nu s-a efectuat</p>)
+      }
         <form>
           <div className="form-group">
             <div className="textWarningDiv">
@@ -183,10 +199,15 @@ class SignUpForm extends Component {
       if(resp.status!==200){
           throw new Error("signup error");
       }
+      this.setState({
+        signUpSuccess:true
+      })
       
     } catch (err) {
       console.log("Error --:" + err.message);
-      
+      this.setState({
+        signUpError:true
+      })
     }
   }
 }
