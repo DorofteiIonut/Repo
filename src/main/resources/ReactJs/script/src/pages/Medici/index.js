@@ -7,6 +7,7 @@ import "./styles.css";
 import { connect } from "react-redux";
 import { bindActionCreators } from "redux";
 import mediciAction from "../../commun/ReduxActions/MediciBySpecializareAction";
+import Progress from "../../componente/Progress";
 
 class Medici extends Component {
   constructor(props) {
@@ -29,7 +30,8 @@ class Medici extends Component {
       //Trebuie tratata situatia 
       return (
         <div>
-          <img src={require("../../assets/Load.gif")} className="styleGif" />
+          <Progress/>
+          {/* <img src={require("../../assets/Load.gif")} className="styleGif" /> */}
         </div>
       );
     }

@@ -1,13 +1,22 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
-import { Button } from "react-bootstrap";
+import Button from "material-ui/Button";
 import "./styles.css";
 import MesajValidare from "../MesajValidare/index";
 import { connect } from 'react-redux'
 import loginUser from "../../commun/ReduxActions/LoginReduxAction";
 import {bindActionCreators} from 'redux'; 
 import {withRouter} from 'react-router-dom';
+import Icon from 'material-ui/Icon';
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "material-ui/Dialog";
+import Slide from "material-ui/transitions/Slide";
+import Progress from "../Progress";
 
 class TextFieldGroup extends Component {
   constructor(props) {
@@ -17,11 +26,16 @@ class TextFieldGroup extends Component {
       isUsernameError:false,
       isPassError:false,
       username: null,
-      password: null
+      password: null,
+      isAuthError:false
     };
   }
 
   render() {
+    if(this.state.isAuthError){
+      return this.renderError();
+    }
+
     return (
       <div className="formContainerDiv">
         <form>
@@ -58,14 +72,19 @@ class TextFieldGroup extends Component {
             />
           </div>
           {!this.props.authInfo.inProgress && 
+          <div className="loginButtonStyle">
           <Button
-            bsStyle="info"
-            bsSize="lg"
-            className="loginButtonStyle"
+            style={{fontSize:15 }}
+            size="large"
+            variant="raised"
+            disableRipple
+            color="primary"
             onClick={() => this._onLoginPress()}
-          >
-            Login
-          </Button>
+            >
+              Log in
+              <Icon><img src={require("../../assets/download.png")} className="styleIcon" alt="load"/></Icon>
+              </Button>
+          </div>
           }
           {this.props.authInfo.inProgress &&
           <div>
@@ -79,19 +98,17 @@ class TextFieldGroup extends Component {
   _validation() {
     if(this.state.username ===null || this.state.username===""){
       this.setState({isUsernameError:true}) 
+      return false;
   }
     if(this.state.password===null || this.state.password===""){
-    this.setState({isPassError:true})
+    this.setState({isPassError:true});
+    return false;
+
   }
-    if(this.state.isPassError || this.state.isUsernameError){
-      return false;
-    }else{ 
     return true;
-    }
   }
 
 async _onLoginPress() {
-   
     try {
       if (!this._validation()) {
         throw new Error("Try again!");
@@ -100,11 +117,49 @@ async _onLoginPress() {
       
       if(this.props.authInfo.token!==null){
         this.props.history.push('/');
+      }else {
+        this.setState({
+          isAuthError:true
+        })
       }
     } catch (error) {
       console.log(error.message);
     }
   }
+
+  renderError(){
+    return (
+      <div >
+        <Dialog
+          open={this.state.isAuthError}
+          transition={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle className="divDialog" id="alert-dialog-slide-title">
+            {"Opps!"}
+          </DialogTitle>
+          <DialogTitle className="divDialog" id="alert-dialog-slide-title">
+            {"User sau parola incorecte !"}
+          </DialogTitle>
+          <DialogActions>
+            <Button  className="divDialog" onClick={this.handleClose} color="primary">
+              OK
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    );
+  }
+
+  handleClose = () => {
+    this.setState({ isAuthError: false });
+  };
+}
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
 }
 
 function mapStateToProps(state){

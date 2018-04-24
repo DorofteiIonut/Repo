@@ -1,9 +1,19 @@
 import React, { Component } from "react";
 import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
-import { Button } from "react-bootstrap";
 import "./styles.css";
+import Button from "material-ui/Button";
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "material-ui/Dialog";
+import Slide from "material-ui/transitions/Slide";
+import { withRouter } from "react-router-dom";
 import Calendar from "react-calendar";
+import Select from 'material-ui/Select';
+import { MenuItem } from 'material-ui/Menu';
 
 class ProgramariForm extends Component {
   constructor(props) {
@@ -23,30 +33,75 @@ class ProgramariForm extends Component {
       data: null,
       ora: null,
       programareError: false,
-      programareSuccess: false
+      programareSuccess: false,
+      open:false,
+      age:"",
     };
   }
+  handleClose = () => {
+    this.setState({ signUpSuccess: false });
+    this.props.history.push("/");
+  };
+  handleChange = event => {
+    this.setState({ [event.target.name]: event.target.value });
+  };
+
+  handleCloser = () => {
+    this.setState({ open: false });
+  };
+
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
 
   render() {
     if (this.state.programareSuccess) {
       return (
         <div>
-          <p>S-a inregistrat prgramarea</p>
+          <Dialog
+            open={this.state.programareSuccess}
+            transition={Transition}
+            keepMounted
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle id="alert-dialog-slide-title">
+              {"Felicitari!"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Programarea dumneavoastra s-a inregistrat! Va multumesc!
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Continua
+              </Button>
+            </DialogActions>
+          </Dialog>
         </div>
       );
     }
     if (this.state.data === null) {
       return (
         <div className="calendar">
-          <Calendar onChange={()=>console.log("Calendar")} value={this.state.data} />
+          <Calendar
+            onClickDay={(data)=>{console.log(data.getDate()+"/"+(data.getMonth()+1));
+            this.setState({
+              data:data.getDate()+"/"+(data.getMonth()+1)
+            })
+          }}
+            tileDisabled={(date)=>disableDates(date)}
+            onChange={() => console.log("Calendar")}
+            value={this.state.data}
+          />
         </div>
       );
     }
     return (
       <div className="divContent">
-        {this.state.programareError && (
-          <p>Inregistrarea nu s-a efectuat</p>
-        ) /* if erroare afisam mesaj eroare */}
+        {this.state.programareError && <p>Inregistrarea nu s-a efectuat</p>}
         <form className=" formStyle">
           <label className="labelStyles">
             {" "}
@@ -132,32 +187,51 @@ class ProgramariForm extends Component {
             </div>
           </label>
 
-          <label className="labelStyles">
+          
             {" "}
-            Ora programarii
+            
             <div className={this.state.isOraError ? "inputError" : ""}>
-              <input
-                type="name"
-                className="form-control"
-                placeholder={this.state.isOraError ? "Mesaj de eroare" : ""}
-                onChange={text =>
-                  this.setState({
-                    ora: text.target.value,
-                    isOraError: false
-                  })
-                }
-              />
+            <div className="divH">
+            <h className={"h"}> Ora programarii</h>
             </div>
-          </label>
-
+            <div  className="divSelect">
+            <Select
+             open={this.state.open}
+            onClose={this.handleCloser}
+            onOpen={this.handleOpen}
+            value={this.state.age}
+            onChange={this.handleChange}
+            inputProps={{
+              name: 'age',
+              id: 'controlled-open-select',
+            }}
+          >
+          <div  className="select">
+            <MenuItem value="">
+              <em>None</em>
+            </MenuItem>
+            <MenuItem value={10}>10:30</MenuItem>
+            <MenuItem value={20}>11:00</MenuItem>
+            <MenuItem value={30}>11:30</MenuItem>
+            <MenuItem value={40}>12:00</MenuItem>
+            <MenuItem value={50}>12:30</MenuItem>
+            <MenuItem value={60}>13:00</MenuItem>
+            </div>
+          </Select>
+          </div>
+            </div>
+          
+            <div  className="btnStyle">
           <Button
-            bsStyle=""
-            bsSize="lg"
-            className="btnStyle"
+           size="large"
+            style={{fontSize:15 }}
+           
+            color="green"
             onClick={() => this._onSavePress()}
           >
             Save
           </Button>
+          </div>
         </form>
       </div>
     );
@@ -251,4 +325,17 @@ class ProgramariForm extends Component {
   }
 }
 
-export default ProgramariForm;
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
+}
+
+function disableDates(data) {
+  let dataAzi=new Date();
+  
+  if(data.date.setHours(0,0,0,0) === dataAzi.setHours(0,0,0,0)){
+    console.log("DISABLE");
+    return true;
+  }
+  return false;
+}
+export default withRouter(ProgramariForm);

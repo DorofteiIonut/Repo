@@ -11,7 +11,7 @@ import medicProfil from "../../commun/ReduxActions/ProfilMedicAction"
 class ProfilMedic extends Component {
 
  async componentWillMount(){
-  console.log("ce avem in redux:"+JSON.stringify( this.props.location.state.detail));
+  
   await this.props.medicProfil(this.props.authInfo.token,this.props.location.state.detail);
   }   
 
