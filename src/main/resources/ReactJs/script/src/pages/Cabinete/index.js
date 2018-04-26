@@ -12,14 +12,14 @@ class Cabinete extends Component {
             <div className="divMedici">
                  <Header/> 
                  <div className="divListaMedici">
-                 {this.renderListaMedici()}
+                 {this.renderCabinete()}
                 </div>
             </div>
 
         );
       }
 
-      renderListaMedici(){
+      renderCabinete(){
           let listaCard=[];
           for(let i=1; i<=5;i++){
               listaCard.push(<CardCabinet/>)

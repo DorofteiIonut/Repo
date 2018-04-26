@@ -12,8 +12,13 @@ import Dialog, {
 import Slide from "material-ui/transitions/Slide";
 import { withRouter } from "react-router-dom";
 import Calendar from "react-calendar";
-import Select from 'material-ui/Select';
-import { MenuItem } from 'material-ui/Menu';
+import Select from "material-ui/Select";
+import IconButton from "material-ui/IconButton";
+import Menu, { MenuItem } from "material-ui/Menu";
+import Icon from "material-ui/Icon";
+import Progress from '../../componente/Progress/index';
+
+const options = ["10:00", "10:30", "11:00", "11:30", "12:00"];
 
 class ProgramariForm extends Component {
   constructor(props) {
@@ -34,8 +39,9 @@ class ProgramariForm extends Component {
       ora: null,
       programareError: false,
       programareSuccess: false,
-      open:false,
-      age:"",
+      open: false,
+      age: "",
+      anchorEl: null
     };
   }
   handleClose = () => {
@@ -53,8 +59,16 @@ class ProgramariForm extends Component {
   handleOpen = () => {
     this.setState({ open: true });
   };
+  handleClick = event => {
+    this.setState({ anchorEl: event.currentTarget });
+  };
 
   render() {
+    const { anchorEl } = this.state;
+    if(this.state.inProgress){
+      return <Progress/>
+    }
+
     if (this.state.programareSuccess) {
       return (
         <div>
@@ -87,12 +101,13 @@ class ProgramariForm extends Component {
       return (
         <div className="calendar">
           <Calendar
-            onClickDay={(data)=>{console.log(data.getDate()+"/"+(data.getMonth()+1));
-            this.setState({
-              data:data.getDate()+"/"+(data.getMonth()+1)
-            })
-          }}
-            tileDisabled={(date)=>disableDates(date)}
+            onClickDay={data => {
+              console.log(data.getDate() + "-" + (data.getMonth() + 1));
+              this.setState({
+                data: data.getMonth() + 1 + "-" + data.getDate()
+              });
+            }}
+            tileDisabled={date => disableDates(date)}
             onChange={() => console.log("Calendar")}
             value={this.state.data}
           />
@@ -101,7 +116,7 @@ class ProgramariForm extends Component {
     }
     return (
       <div className="divContent">
-        {this.state.programareError && <p>Inregistrarea nu s-a efectuat</p>}
+        {this.state.programareError && <p className="pErrorProgramariForm">Inregistrarea nu s-a efectuat</p>}
         <form className=" formStyle">
           <label className="labelStyles">
             {" "}
@@ -122,7 +137,6 @@ class ProgramariForm extends Component {
               />
             </div>
           </label>
-
           <label className="labelStyles">
             {" "}
             Prenume
@@ -144,7 +158,6 @@ class ProgramariForm extends Component {
               />
             </div>
           </label>
-
           <label className="labelStyles">
             {" "}
             E-mail
@@ -167,7 +180,6 @@ class ProgramariForm extends Component {
               />
             </div>
           </label>
-
           <label className="labelStyles">
             {" "}
             Numar telefon
@@ -185,52 +197,79 @@ class ProgramariForm extends Component {
                 }
               />
             </div>
-          </label>
-
-          
-            {" "}
-            
-            <div className={this.state.isOraError ? "inputError" : ""}>
+          </label>{" "}
+          <div className={this.state.isOraError ? "inputError" : ""}>
             <div className="divH">
-            <h className={"h"}> Ora programarii</h>
+              <h className={"h"}> Ora programarii</h>
             </div>
-            <div  className="divSelect">
-            <Select
-             open={this.state.open}
-            onClose={this.handleCloser}
-            onOpen={this.handleOpen}
-            value={this.state.age}
-            onChange={this.handleChange}
-            inputProps={{
-              name: 'age',
-              id: 'controlled-open-select',
-            }}
-          >
-          <div  className="select">
-            <MenuItem value="">
-              <em>None</em>
-            </MenuItem>
-            <MenuItem value={10}>10:30</MenuItem>
-            <MenuItem value={20}>11:00</MenuItem>
-            <MenuItem value={30}>11:30</MenuItem>
-            <MenuItem value={40}>12:00</MenuItem>
-            <MenuItem value={50}>12:30</MenuItem>
-            <MenuItem value={60}>13:00</MenuItem>
+            <div className="divSelect">
+              <div>
+                <IconButton
+                  aria-label="More"
+                  aria-owns={anchorEl ? "long-menu" : null}
+                  aria-haspopup="true"
+                  onClick={this.handleClick}
+                >
+                  <div>
+                    {!this.state.ora && (
+                      <img
+                        src={require("../../assets/click.png")}
+                        className="divImg"
+                        alt="logo"
+                      />
+                    )}
+                    {this.state.ora && <p> {this.state.ora} </p>}
+                  </div>
+                </IconButton>
+                <Menu
+                  id="long-menu"
+                  anchorEl={anchorEl}
+                  open={Boolean(anchorEl)}
+                  onClose={this.handleClose2}
+                  PaperProps={{
+                    style: {
+                      maxHeight: 48 * 4.5,
+                      width: 200
+                    }
+                  }}
+                >
+                  {options.map(option => (
+                    <MenuItem
+                      key={option}
+                      onClick={() =>
+                        this.setState({
+                          ora: option,
+                          anchorEl: null,
+                          isOraError: false,
+                          isEmailError: false,
+                          isDataError: false
+                        })
+                      }
+                    >
+                      {option}
+                    </MenuItem>
+                  ))}
+                </Menu>
+              </div>
             </div>
-          </Select>
           </div>
-            </div>
-          
-            <div  className="btnStyle">
-          <Button
-           size="large"
-            style={{fontSize:15 }}
-           
-            color="green"
-            onClick={() => this._onSavePress()}
-          >
-            Save
-          </Button>
+          <div className="btnStyle">
+            <Button
+              size="large"
+              style={{ fontSize: 15 }}
+              color="green"
+              text-color="white"
+              onClick={() => this._onSavePress()}
+            >
+              Save
+              <Icon>
+                <img
+                  src={require("../../assets/signup.png")}
+                  className="divImg"
+                  alt="load"
+                />
+              </Icon>
+            </Button>
           </div>
         </form>
       </div>
@@ -311,28 +350,64 @@ class ProgramariForm extends Component {
   _onSavePress() {
     try {
       if (this._validation()) {
-        this._callApi();
         //Call Api
-
-        //if status ==200 afiseaza Succes
-
-        //else throw new Error
+        let conversieData =
+          this.state.data.length == 4 ? "0" + this.state.data : this.state.data;
+        let dateFormat =
+          "2018-" + conversieData + "T" + this.state.ora + ":00Z";
+        let dataTimestamp = new Date(dateFormat);
+        let programare = {
+          data: dataTimestamp.getTime(),
+          nume: this.state.nume,
+          prenume: this.state.prenume,
+          email: this.state.email,
+          nrtel: this.state.telefon,
+          medic: {
+            idMed: this.props.location.state.idRezervare
+          }
+        };
+        let response=this._callAPI(programare);
+        if(response.status!==201){
+          throw new Error(JSON.stringify(response));
+        }
       }
     } catch (error) {
       console.log(error.message);
-      //setam stateul de eroare
+      this.setState({programareError:true})
     }
   }
-}
+
+  async _callAPI(programObj) {
+    this.setState({inProgress:true})
+    const resp = await fetch("http://localhost:8080/programare/add", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: this.props.token
+      },
+      body: JSON.stringify({
+        data: programObj.data,
+        nume: programObj.nume,
+        prenume: programObj.prenume,
+        email: programObj.email,
+        nrtel: programObj.nrtel,
+        medic: programObj.medic
+      })
+    });
+    this.setState({inProgress:false});  
+    return resp;
+    }
+  }
+
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
 }
 
 function disableDates(data) {
-  let dataAzi=new Date();
-  
-  if(data.date.setHours(0,0,0,0) === dataAzi.setHours(0,0,0,0)){
+  let dataAzi = new Date();
+
+  if (data.date.setHours(0, 0, 0, 0) === dataAzi.setHours(0, 0, 0, 0)) {
     console.log("DISABLE");
     return true;
   }

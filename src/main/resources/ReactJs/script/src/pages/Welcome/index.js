@@ -15,13 +15,13 @@ class Welcome extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="divContainerWelcomePage">
+        <div className="hederWelcomePage">
           <Header
             isWelcomePage={this.props.authInfo.token == null ? true : false}
           />
         </div>
-        <div className="div" />
+        <div className="divWelcomePage" />
       </div>
     );
   }

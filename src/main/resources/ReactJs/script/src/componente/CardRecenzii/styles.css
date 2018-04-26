@@ -1,0 +1,23 @@
+.divCartonasRecenzie{
+    background-color: rgba(145, 31, 11, 0.952);
+    width:60%;
+    height: 35%;
+    margin: auto;
+    margin-bottom: 2%;
+}
+.divAvatarRecenzie{
+    width: 15%;
+    height: 50%;
+    margin-left: 2%;
+    float: left;
+}
+.infoRecenzie{
+    float: left;
+    margin-top: 3%;
+    margin-left: 3%;
+}
+.descriereRecenzie{
+    float: left;
+    margin-left: 10%;
+    margin-top: 2.5%;
+}
