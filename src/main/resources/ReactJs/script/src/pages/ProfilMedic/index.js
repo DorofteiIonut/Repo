@@ -8,6 +8,7 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 import medicProfil from "../../commun/ReduxActions/ProfilMedicAction";
 import CardRecenzii from "../../componente/CardRecenzii/index";
+import CardServicii from "../../componente/CardServicii/index";
 
 class ProfilMedic extends Component {
   async componentWillMount() {
@@ -169,13 +170,15 @@ class ProfilMedic extends Component {
     let recenzie = {
       nume: "Dumitrescu",
       prenume: "Constantin",
-      descriere: "Descriere despre medic.....!!!"
+      descriere: "Descriere despre medic bla vla bla bla bla bla bla vla.....!!!"
     };
     for (let i = 1; i <= 5; i++) {
       listaRec.push(<CardRecenzii recenzieModel={recenzie} />);
     }
     return listaRec;
   }
+ 
+  
 }
 function mapStateToProps(state) {
   return {

@@ -11,12 +11,9 @@ class CardRecenzii extends Component{
     render(){
         return(
             <div className="divCartonasRecenzie">
-            <div className="divAvatarRecenzie" >
-            <img src={require("../../assets/logo.jpg")} className="divAvatarRecenzie" />
-                </div>
                 <div className="infoRecenzie">
-                        <p>Nume:{this.props.recenzieModel.nume}</p>
-                        <p>Prenume: {this.props.recenzieModel.prenume}</p>
+                        <p>{this.props.recenzieModel.nume}</p>
+                        <p>{this.props.recenzieModel.prenume}</p>
                     </div>
                     <div className="descriereRecenzie">
                         <p>{this.props.recenzieModel.descriere}</p>

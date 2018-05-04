@@ -8,7 +8,8 @@ import SignUp from "../pages/SignUp/index";
 import RecMedici from "../pages/RecMedici/index";
 import Programari from "../pages/Programari/index";
 import ProfilMedic from "../pages/ProfilMedic/index";
-import ProfilCabinet from "../pages/ProfilCabinet/index"
+import ProfilCabinet from "../pages/ProfilCabinet/index";
+import Servicii from "../pages/Servicii/index";
 
 const Routes = () => (
   <BrowserRouter>
@@ -22,6 +23,8 @@ const Routes = () => (
     <Route exact path='/programari' component={Programari} />
     <Route exact path='/medic' component={ProfilMedic} />
     <Route exact path='/cabinet' component={ProfilCabinet} />
+    <Route exact path='/servicii' component={Servicii} />
+
     </Switch>
   </BrowserRouter>
 );

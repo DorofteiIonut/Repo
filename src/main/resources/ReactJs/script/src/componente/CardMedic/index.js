@@ -44,6 +44,9 @@ class CardMedic extends Component {
           <p>Adresa: {this.renderAdrese()} </p>
           <p>Nr. Telefon:{this.renderNrTel()} </p>
         </div>
+        <button onClick={()=>this.onClick2(this.props.idMedic)} className="buttonPreturiServ">
+          Vezi preturi
+          </button>
         <button onClick={()=>this.onClick(this.props.idMedic)} className="buttonProfil">
         
           Vezi detalii
@@ -58,6 +61,14 @@ class CardMedic extends Component {
       state: { detail: id }
     }) 
    }
+
+   onClick2(id){
+    this.props.history.push({
+      pathname: '/servicii',
+      state: { detail: id }
+    }) 
+   }
+
 renderNrTel(){
   let listaNr=[];
   let numere=this.props.nrTel.length;
