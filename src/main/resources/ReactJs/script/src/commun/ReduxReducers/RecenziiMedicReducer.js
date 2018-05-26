@@ -18,7 +18,8 @@ export const initialState = {
           };
            break;
         }
-       case getRecenziiMediciConst.GET_RECENZIIMEDICI_SUCCESS:{
+       case getRecenziiMediciConst.GET_RECENZIIMEDIC_SUCCESS:{
+         console.log(JSON.stringify(action.payload)+"&&&&&&&&&");
            state={
                ...state,
                inPrgress:false,

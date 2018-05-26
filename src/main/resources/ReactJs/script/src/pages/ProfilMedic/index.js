@@ -9,6 +9,8 @@ import { connect } from "react-redux";
 import medicProfil from "../../commun/ReduxActions/ProfilMedicAction";
 import CardRecenzii from "../../componente/CardRecenzii/index";
 import CardServicii from "../../componente/CardServicii/index";
+import recenziiMediciAction from "../../commun/ReduxActions/RecenziiMedicAction";
+import Progress from "../../componente/Progress/index";
 
 class ProfilMedic extends Component {
   async componentWillMount() {
@@ -16,11 +18,16 @@ class ProfilMedic extends Component {
       this.props.authInfo.token,
       this.props.location.state.detail
     );
+    await this.props.recenziiMediciAction(
+      this.props.authInfo.token,
+      this.props.location.state.detail
+    );
   }
 
   render() {
-    if (this.props.profilMedic.dateMedic == null) {
-      return <div />;
+    console.log(JSON.stringify(this.props.recenzieMedic)+"--------");
+    if (this.props.profilMedic.dateMedic === null || this.props.recenzieMedic.listaRecenziiMedici===null) {
+      return <Progress/>;
     } else {
       return (
         <div className="divProfilMedic">
@@ -139,7 +146,7 @@ class ProfilMedic extends Component {
               </button>
 
               <button
-                onClick={() => this.onClick(this.props.location.state.detail)}
+                onClick={() => this.onClick2(this.props.location.state.detail)}
                 className="butonRecenzie"
               >
                 Adauga recenzie
@@ -165,15 +172,19 @@ class ProfilMedic extends Component {
     });
   }
 
+  onClick2(id){
+    this.props.history.push({
+      pathname:"/recenzie",
+      state:{idRecenzie:id}
+    });
+  }
   renderlistaRecenzii() {
     let listaRec = [];
-    let recenzie = {
-      nume: "Dumitrescu",
-      prenume: "Constantin",
-      descriere: "Descriere despre medic bla vla bla bla bla bla bla vla.....!!!"
-    };
-    for (let i = 1; i <= 5; i++) {
-      listaRec.push(<CardRecenzii recenzieModel={recenzie} />);
+    for (let i = 0;i <this.props.recenzieMedic.listaRecenziiMedici.length; i++) {
+      console.log(JSON.stringify(this.props.recenzieMedic.listaRecenziiMedici[i]))
+      listaRec.push(
+      <CardRecenzii
+       recenzieModel={this.props.recenzieMedic.listaRecenziiMedici[i]} />);
     }
     return listaRec;
   }
@@ -183,15 +194,16 @@ class ProfilMedic extends Component {
 function mapStateToProps(state) {
   return {
     authInfo: state.authReducer,
-    profilMedic: state.profilMedic
+    profilMedic: state.profilMedic,
+    recenzieMedic:state.recenziiMedicReducer,
   };
 }
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     {
-      medicProfil: (token, id) => medicProfil(token, id)
-    },
+      medicProfil: (token, id) => medicProfil(token, id),
+      recenziiMediciAction: (token,id)=>  recenziiMediciAction(token,id)},
     dispatch
   );
 }

@@ -33,8 +33,6 @@ class Servicii extends Component{
 
 renderlistaServiciiMedicale(){
     let listraSpecializare=[];
-   
-    
     for(let i=0;i<this.props.serviciuMedical.listaServicii.length;i++){
       listraSpecializare.push(
       <CardServicii 

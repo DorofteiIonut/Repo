@@ -3,7 +3,7 @@ import Api from "../../Api/Api";
 
 export default function recenziiMediciAction(token,id){
     return async function(dispach){
-        dispach({type:getRecenziiMediciConst.GET_RECENZIIMEDICI_IN_PROGRESS});
+        dispach({type:getRecenziiMediciConst.GET_RECENZIIMEDIC_IN_PROGRESS});
         try {
             const resp = await fetch(Api.getRecenziiMediciUrl+id, {
                 method: "GET",
@@ -16,9 +16,10 @@ export default function recenziiMediciAction(token,id){
         if(json==null || resp.status!==200){
             throw new Error(json);
         }
-        dispach({type:getRecenziiMediciConst.GET_RECENZIIMEDICI_SUCCESS,payload:json});
+        console.log(JSON.stringify(json)+"#######");
+        dispach({type:getRecenziiMediciConst.GET_RECENZIIMEDIC_SUCCESS,payload:json});
         } catch (error) {
-            dispach({type:getRecenziiMediciConst.GET_RECENZIIMEDICI_FAILURE,payload:error});
+            dispach({type:getRecenziiMediciConst.GET_RECENZIIMEDIC_FAILURE,payload:error});
         }
     }
 }

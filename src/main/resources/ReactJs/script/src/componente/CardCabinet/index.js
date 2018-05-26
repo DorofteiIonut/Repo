@@ -37,11 +37,10 @@ class CardCabinet extends Component {
           />
           </div>
                     <div className="divDate">
-                        <p>Orar: 07:30-16:00 </p>
-                        <p>Denumire: Policlinica</p>
-                        <p>Adresa: Suceava </p> 
-                        <p>Nr. Telefon:07432465432 </p>
-                        <p>Tip cabinet: Privat </p>
+                       
+                        <p>Denumire:{this.props. denumireCabinet}</p>
+                        <p>Adresa: {this.props.adresaCabinet} </p> 
+                        <p>Tip cabinet:{this.props. tipCabinet}</p>
                     </div>
                     <button onClick={()=>this.onClick(this.props.idCabinet)} className="buttonDetalii">
         
