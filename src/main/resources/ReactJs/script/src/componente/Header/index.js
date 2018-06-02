@@ -19,7 +19,7 @@ class Header extends Component {
     return (
       <div className="headerContainerDiv">
         <nav class="navbar navbar-inverse">
-          <img src={require("../../assets/logo.jpg")} className="logoStyle" />
+          <img src={require("../../assets/logo.jpg")} className="logoStyle" alt="logo"/>
           <div class="container-fluid">
             <ul class="nav navbar-nav navbar-right">
               <li>

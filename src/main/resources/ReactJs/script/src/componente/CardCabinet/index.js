@@ -1,18 +1,18 @@
-import React, { Component } from 'react';
-import 'bootstrap/dist/css/bootstrap.css';
-import 'bootstrap/dist/css/bootstrap-theme.css';
-import './styles.css';
+import React, { Component } from "react";
+import "bootstrap/dist/css/bootstrap.css";
+import "bootstrap/dist/css/bootstrap-theme.css";
+import "./styles.css";
 import Rating from "react-rating";
+import { withRouter } from "react-router-dom";
 
 class CardCabinet extends Component {
-    
-      render() {
-        return (
-            <div className="divCard">
-                <div className="divImgCabinet">
-                <img src={require("../../assets/logo.jpg")} className="imgStyle" />
+  render() {
+    return (
+      <div className="divCard">
+        <div className="divImgCabinet">
+          <img src={require("../../assets/logo.jpg")} className="imgStyle" />
 
-                <Rating
+          <Rating
             placeholderRating={3.88}
             emptySymbol={
               <img
@@ -34,19 +34,28 @@ class CardCabinet extends Component {
             }
             readonly={true}
           />
-          </div>
-                    
-                    <div className="divDate">
-                        <p>Orar: 07:30-16:00 </p>
-                        <p>Denumire: Policlinica</p>
-                        <p>Adresa: Suceava </p> 
-                        <p>Nr. Telefon:07432465432 </p>
-                        <p>Tip cabinet: Privat </p>
-                    </div>
-            
-            </div>
-        );
-      }
-    }
-    
-    export default CardCabinet;
+        </div>
+        <div className="divDate">
+          <p>Denumire:{this.props.denumireCabinet}</p>
+          <p>Adresa: {this.props.adresaCabinet} </p>
+          <p>Tip cabinet:{this.props.tipCabinet}</p>
+        </div>
+        <button
+          onClick={() => this.onClick(this.props.idCabinet)}
+          className="buttonDetalii"
+        >
+          Vezi detalii
+        </button>
+      </div>
+    );
+  }
+  onClick(id) {
+    console.log(id+"------------")
+    this.props.history.push({
+      pathname: "/cabinet",
+      state: { detail: id }
+    });
+  }
+}
+
+export default (withRouter(CardCabinet));

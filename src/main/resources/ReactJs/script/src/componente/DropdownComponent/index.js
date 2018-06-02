@@ -4,7 +4,6 @@ import "bootstrap/dist/css/bootstrap-theme.css";
 import "./styles.css";
 import { connect } from "react-redux";
 import { withRouter } from "react-router-dom";
-import {Link} from "react-router-dom";
 import setSpecializare from "../../commun/ReduxActions/SetSpecializareAction";
 import {bindActionCreators} from 'redux'; 
 

@@ -8,9 +8,6 @@ import specializareList from "../../commun/ReduxActions/SpecializariAction";
 import { bindActionCreators } from "redux";
 
 class Welcome extends Component {
-  constructor(props) {
-    super(props);
-  }
 
   async componentWillMount() {
     await this.loadData();
@@ -18,13 +15,13 @@ class Welcome extends Component {
 
   render() {
     return (
-      <div>
-        <div>
+      <div className="divContainerWelcomePage">
+        <div className="hederWelcomePage">
           <Header
             isWelcomePage={this.props.authInfo.token == null ? true : false}
           />
         </div>
-        <div className="div" />
+        <div className="divWelcomePage" />
       </div>
     );
   }

@@ -1,5 +1,5 @@
 .divCard{
-    background-color: aqua;
+    background-color: rgb(124, 19, 98);
     width:60%;
     height: 35%;
     margin: auto;
@@ -26,4 +26,19 @@
     margin-left: 10%;
     margin-top: 2.5%;
     
+}
+.buttonDetalii{
+    background-color: rgba(76, 175, 79, 0);
+    border: none;
+    font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    color: aliceblue;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin-top: 20%;
+    margin-left: 23%;
+    cursor: pointer;
+    align-self: flex-end;
 }

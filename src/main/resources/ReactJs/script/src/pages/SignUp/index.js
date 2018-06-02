@@ -6,12 +6,12 @@ import SignUpForm from '../../componente/SignUpForm/index';
 import './styles.css';
 
 class SignUp extends Component {
-    
+   
       render() {
         return (
             <div className="divSignUp">
                 <Header isSignUp={true}/>
-                <h1 className="pageSignUpTitle"> Sign Up</h1>
+                <h1 className="pageSignUpTitle"> </h1>
                 <SignUpForm/>
             </div>
 

@@ -22,6 +22,7 @@ import com.licenta.SpringBoot.Models.CabinetModel.CabinetModel;
 import com.licenta.SpringBoot.Models.ProgramModel.ProgramModel;
 import com.licenta.SpringBoot.Models.ProgramariModel.ProgramariModel;
 import com.licenta.SpringBoot.Models.RecenziiModel.RecenziiModel;
+import com.licenta.SpringBoot.Models.ServiciiModel.ServiciiModel;
 
 
 @Entity
@@ -50,7 +51,6 @@ public class MediciModel {
 	@Column(unique=true, name="FACEBOOK")
 	private String facebook;
 	
-
 	@ManyToMany
 	@JoinTable(name = "MEDICI_CABINET", 
 		joinColumns = @JoinColumn(name = "IDMED", referencedColumnName = "IDMED"), 
@@ -65,7 +65,7 @@ public class MediciModel {
 	private Set<ProgramModel> program = new HashSet<ProgramModel>();
 	
 	@OneToMany(mappedBy="medic", cascade=CascadeType.ALL)
-	private Set<ProgramModel> servicii = new HashSet<ProgramModel>();
+	private Set<ServiciiModel> servicii = new HashSet<ServiciiModel>();
 	
 	@OneToMany(mappedBy="medic", cascade=CascadeType.ALL)
 	private Set<ProgramariModel> programari = new HashSet<ProgramariModel>();
@@ -77,27 +77,6 @@ public class MediciModel {
 
 	public MediciModel() {
 	}
-
-	
-
-	public MediciModel(long idMed, String nume, String prenume, List<String> numereTel, String email, String facebook,
-			Set<CabinetModel> cabinete, List<String> specializare, Set<ProgramModel> program,
-			Set<ProgramModel> servicii, Set<ProgramariModel> programari, Set<RecenziiModel> recenzii) {
-		super();
-		this.idMed = idMed;
-		this.nume = nume;
-		this.prenume = prenume;
-		this.numereTel = numereTel;
-		this.email = email;
-		this.facebook = facebook;
-		this.cabinete = cabinete;
-		this.specializare = specializare;
-		this.program = program;
-		this.servicii = servicii;
-		this.programari = programari;
-		this.recenzii = recenzii;
-	}
-
 
 
 	public long getIdMed() {
@@ -117,16 +96,6 @@ public class MediciModel {
 
 	public void setNume(String nume) {
 		this.nume = nume;
-	}
-
-
-	public Set<ProgramModel> getServicii() {
-		return servicii;
-	}
-
-
-	public void setServicii(Set<ProgramModel> servicii) {
-		this.servicii = servicii;
 	}
 
 
@@ -200,6 +169,16 @@ public class MediciModel {
 	}
 
 
+	public Set<ServiciiModel> getServicii() {
+		return servicii;
+	}
+
+
+	public void setServicii(Set<ServiciiModel> servicii) {
+		this.servicii = servicii;
+	}
+
+
 	public Set<ProgramariModel> getProgramari() {
 		return programari;
 	}
@@ -220,6 +199,25 @@ public class MediciModel {
 	}
 
 
+	public MediciModel(long idMed, String nume, String prenume, List<String> numereTel, String email, String facebook,
+			Set<CabinetModel> cabinete, List<String> specializare, Set<ProgramModel> program,
+			Set<ServiciiModel> servicii, Set<ProgramariModel> programari, Set<RecenziiModel> recenzii) {
+		super();
+		this.idMed = idMed;
+		this.nume = nume;
+		this.prenume = prenume;
+		this.numereTel = numereTel;
+		this.email = email;
+		this.facebook = facebook;
+		this.cabinete = cabinete;
+		this.specializare = specializare;
+		this.program = program;
+		this.servicii = servicii;
+		this.programari = programari;
+		this.recenzii = recenzii;
+	}
+
+
 	@Override
 	public String toString() {
 		return "MediciModel [idMed=" + idMed + ", nume=" + nume + ", prenume=" + prenume + ", numereTel=" + numereTel
@@ -227,8 +225,6 @@ public class MediciModel {
 				+ specializare + ", program=" + program + ", servicii=" + servicii + ", programari=" + programari
 				+ ", recenzii=" + recenzii + "]";
 	}
-
-
 	
 
 }

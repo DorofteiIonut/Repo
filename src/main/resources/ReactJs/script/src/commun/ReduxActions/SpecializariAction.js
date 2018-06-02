@@ -8,7 +8,7 @@ export default function specializareList(token) {
       const resp = await fetch(getSpecializariUrl.getSpecializariUrl, {
         method: "GET",
         headers: {
-            "Authorization":token,
+            Authorization:token,
             "Content-Type": "application/json"
         },
       });

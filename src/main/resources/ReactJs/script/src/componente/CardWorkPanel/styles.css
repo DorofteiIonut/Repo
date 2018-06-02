@@ -1,0 +1,11 @@
+.divCartonasWorkPanel{
+    background-color: antiquewhite;
+    width: 100%;
+    height: 100%;
+    padding-left: 2%;
+    margin-top: 5%;
+}
+.styleDatePacient{
+    size: 100%;
+    font: 1.5em sans-serif;
+}
