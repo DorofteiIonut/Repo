@@ -9,6 +9,6 @@ const getServiciiUrl="http://localhost:8080/servicii/getAllServicii/";
 const getProgramUrl="http://localhost:8080/recenzie/getAll/";
 const getCabineteUrl="http://localhost:8080/cabinet/getAllCabinete";
 const getProgramariUrl="http://localhost:8080/programare/getAllProgramari";
-const getProfilCabinet=""//de continuat
+const getProfilCabinet="http://localhost:8080/cabinet/getProfilCabinet/";
 
-export default {loginUrl,signUpUrl,getSpecializariUrl,getMediciBySpecializareUrl,getProfilMedic,getRecenziiMediciUrl,getServiciiUrl,getCabineteUrl,getProgramariUrl}
+export default {loginUrl,signUpUrl,getSpecializariUrl,getMediciBySpecializareUrl,getProfilMedic,getRecenziiMediciUrl,getServiciiUrl,getCabineteUrl,getProgramariUrl,getProfilCabinet}

@@ -45,6 +45,7 @@ class Cabinete extends Component {
           for(let i=0; i<this.props.listaCabinete.listaCabinete.length;i++){
               listaCard.push(
               <CardCabinet
+              idCabinet={this.props.listaCabinete.listaCabinete[i].idCab}
               rating={
                 isNaN(this.props.listaCabinete.listaCabinete[i].medieRecenzie)
                   ? 3

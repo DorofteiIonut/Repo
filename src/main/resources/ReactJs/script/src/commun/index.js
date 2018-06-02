@@ -7,6 +7,7 @@ import Servicii from "./ReduxReducers/ServiciiReducer";
 import RecenziiMedic from "./ReduxReducers/RecenziiMedicReducer";
 import Cabinete from "./ReduxReducers/CabineteReducer";
 import ProfilCabinet from "./ReduxReducers/ProfilCabinetReducer";
+import Programari from "./ReduxReducers/ProgramariReducer";
 
 export default combineReducers({
     authReducer:authReducer,
@@ -17,4 +18,5 @@ export default combineReducers({
     recenziiMedicReducer:RecenziiMedic,
     listaCabinete:Cabinete,
     profilCabinet:ProfilCabinet,
+    programari:Programari,
     });

@@ -15,6 +15,7 @@ export default function programariAction(token){
             const json=await resp.json();
             if(json==null || resp.status!==200){
                 throw new Error(json);
+                
         }
         dispach({type:getProgramariConst.GET_PROGRAMARI_SUCCESS, payload:json});
     }catch(error){

@@ -4,9 +4,28 @@ import "bootstrap/dist/css/bootstrap-theme.css";
 import Header from "../../componente/Header/index";
 import "./styles.css";
 import Rating from "react-rating";
+import { bindActionCreators } from "redux";
+import { connect } from "react-redux";
+import cabinetProfil from "../../commun/ReduxActions/ProfilCabinetAction";
+import Progress from "../../componente/Progress/index";
 
 class ProfilCabinet extends Component {
+
+  async componentWillMount() {
+    await this.props.cabinetProfil(
+      this.props.location.state.detail,
+      this.props.authInfo.token
+    );
+    console.log(JSON.stringify(this.props.profilCabinet ));
+    console.log(JSON.stringify(this.props.location))
+    console.log(this.props.location.state.detail)
+  }
+  
   render() {
+    if(this.props.profilCabinet.dateCabinet === null ){
+      return <Progress/>;
+    }
+    else{
     return (
       <div>
         <div>
@@ -68,10 +87,10 @@ class ProfilCabinet extends Component {
               />
             </div>
             <div className="infoDiv">
-                <p>Orar: 07:30-16:00 </p>
-                <p>Adresa: Suceava </p>
-                <p>Nr. Telefon:07432465432 </p>
-                <p>Tip cabinet: Privat </p>
+                <p>Denumire: {this.props.profilCabinet.dateCabinet.denumire} </p>
+                <p>Adresa: {this.props.profilCabinet.dateCabinet.adresa} </p>
+                <p>Tip:{this.props.profilCabinet.dateCabinet.tip} </p>
+                <p>Medici: {this.props.profilCabinet.dateCabinet.listaMedici} </p>
               </div>
           </div>
         </div>
@@ -79,4 +98,20 @@ class ProfilCabinet extends Component {
     );
   }
 }
-export default ProfilCabinet;
+}
+
+function mapStateToProps(state) {
+  return {
+    authInfo: state.authReducer,
+    profilCabinet: state.profilCabinet,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators(
+    {
+      cabinetProfil: (id, token) => cabinetProfil(id, token)},
+    dispatch
+  );
+}
+export default connect(mapStateToProps, mapDispatchToProps)( ProfilCabinet);

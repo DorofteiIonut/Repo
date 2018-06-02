@@ -18,8 +18,5 @@ class CardWorkPanel extends Component{
     }
 }
 
-// CardWorkPanel.propTypes={
-//     recenzieModel:PropTypes.object
-// }
 
 export default  (withRouter(CardWorkPanel))

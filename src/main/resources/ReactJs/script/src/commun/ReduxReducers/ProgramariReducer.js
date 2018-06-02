@@ -4,6 +4,7 @@ export const initialState={
     inProgress:false,
     error:null,
     listaProgramari:null,
+    
 }
 
 export default function getProgramari(state=initialState, action){

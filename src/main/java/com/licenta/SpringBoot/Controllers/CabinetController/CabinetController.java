@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.licenta.SpringBoot.Models.CabinetModel.CabinetModel;
+import com.licenta.SpringBoot.ResponseEntity.ProfilCabinet;
+import com.licenta.SpringBoot.ResponseEntity.ProfilMedic;
 import com.licenta.SpringBoot.Services.CabinetServices.CabinetServices;
 
 @RestController
@@ -54,6 +56,12 @@ public class CabinetController {
 	public ResponseEntity<List<CabinetModel>> getCabinete(){
 		List<CabinetModel> listaCabiente=cabinetServices.getAllCabinete();
 		return new ResponseEntity<List<CabinetModel>>(listaCabiente, HttpStatus.OK);
+	}
+	
+	@CrossOrigin(origins = "http://localhost:3000")
+	@RequestMapping(value = "/getProfilCabinet/{id}", method = RequestMethod.GET)
+	public ResponseEntity<ProfilCabinet> getProfilCabinet(@PathVariable("id") long id) {
+		return new ResponseEntity<ProfilCabinet>(cabinetServices.profilCabinet(id),HttpStatus.OK);
 	}
 	
 

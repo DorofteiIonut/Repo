@@ -1,6 +1,8 @@
 package com.licenta.SpringBoot.Services.CabinetServices;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -10,6 +12,7 @@ import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
 import com.licenta.SpringBoot.Models.ServiciiModel.ServiciiModel;
 import com.licenta.SpringBoot.Repositorys.CabinetRepository.CabinetRepo;
 import com.licenta.SpringBoot.Repositorys.MediciRepository.MediciRepo;
+import com.licenta.SpringBoot.ResponseEntity.ProfilCabinet;
 
 @Service
 public class CabinetServices {
@@ -40,6 +43,21 @@ public class CabinetServices {
 		List<CabinetModel> listaCabinete=(List<CabinetModel>) cabinetRepo.findAll();
 		return listaCabinete;
 		
+	}
+	
+	public ProfilCabinet profilCabinet(long id) {
+		ProfilCabinet profilCabinet=new ProfilCabinet();
+		CabinetModel cabinetModel=cabinetRepo.findOne(id);
+		profilCabinet.setDenumire(cabinetModel.getDenumire());
+		profilCabinet.setAdresa(cabinetModel.getCabAdress());
+		profilCabinet.setTip(cabinetModel.getTip());
+		Set<MediciModel> listaMedici= cabinetModel.getMedici();
+		List<String> medici= new ArrayList<>();
+		for(MediciModel medic:listaMedici) {
+			medici.add(medic.getNume()+"  "+medic.getPrenume());
+		}
+		profilCabinet.setListaMedici(medici);
+		return profilCabinet;
 	}
 
 }

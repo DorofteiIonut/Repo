@@ -25,7 +25,6 @@ class ProfilMedic extends Component {
   }
 
   render() {
-    console.log(JSON.stringify(this.props.recenzieMedic)+"--------");
     if (this.props.profilMedic.dateMedic === null || this.props.recenzieMedic.listaRecenziiMedici===null) {
       return <Progress/>;
     } else {

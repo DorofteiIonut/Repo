@@ -9,7 +9,7 @@ export const initialState={
 export default function profilCabinet(state = initialState, action){
     switch(action.type){
         case getProfilCabinet.GET_PROFILCABINET_IN_PROGRESS:
-        {
+        {console.log("progress")
         state={
             ...state,
             inProgress:true,
@@ -18,17 +18,19 @@ export default function profilCabinet(state = initialState, action){
         };
         break;
     }
-        case getProfilCabinet.GET_PRIFILCABINET_SUCCESS:
+        case getProfilCabinet.GET_PROFILCABINET_SUCCESS:
         {
+            console.log("succes")
             state={
                 ...state,
                 inProgress:false,
                 dateCabinet:action.payload
             };
+           
             break;
         }
         case getProfilCabinet.GET_PROFILCABINET_FAILURE:
-        {
+        {console.log("error")
             state={
                 ...state,
                 inProgress:null,
