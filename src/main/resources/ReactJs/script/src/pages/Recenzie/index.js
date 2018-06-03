@@ -9,10 +9,10 @@ import { connect } from 'react-redux';
 class Recenzie extends Component {
 
      render() {
-
+      console.log(this.props.location.state.idRecenzie)
         return (
             <div className="divRecenzie">
-                <Header isLoginPage={true}/>
+                <Header />
                 <h1 > Recenzii</h1>
                
             </div>

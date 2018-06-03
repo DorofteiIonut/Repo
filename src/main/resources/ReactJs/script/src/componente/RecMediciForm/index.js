@@ -3,210 +3,199 @@ import "bootstrap/dist/css/bootstrap.css";
 import "bootstrap/dist/css/bootstrap-theme.css";
 import { Button } from "react-bootstrap";
 import "./styles.css";
+import { withRouter } from "react-router-dom";
+import FormDateMedic from "./FormDateMedic";
+import FormCabinet from "./FormCabinet";
+import Dialog, {
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
+} from "material-ui/Dialog";
+import Slide from "material-ui/transitions/Slide";
+
 
 class RecMediciForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      isNumeError: false,
-      isPrenumeError: false,
-      isAdresaError: false,
-      isEmailError: false,
-      isNrtelError: false,
-      isSpecializare: false,
-
-      nume: null,
-      prenume: null,
-      adresa: null,
-      email: null,
-      nr: null,
-      specializare: null,
-      emailErrMsg:"Invalid"
+      showDateMedic: true,
+      showFormCabinet: false,
+      Success: false,
+      isError: false,
+      dateMedic: null,
+      dateCabinet: null
     };
+  }
+  handleClose = () => {
+    this.setState({ Success: false });
+    this.props.history.push("/");
   }
 
   render() {
+    console.log(
+      JSON.stringify(this.state.dateMedic) +
+        "____" +
+        JSON.stringify(this.state.dateCabinet)
+      
+    );
+    if(this.state.Success){
+      return (
+        <div>
+        <Dialog
+          open={this.state.Success}
+          transition={Transition}
+          keepMounted
+          onClose={this.handleClose}
+          aria-labelledby="alert-dialog-slide-title"
+          aria-describedby="alert-dialog-slide-description"
+        >
+          <DialogTitle id="alert-dialog-slide-title">
+            {"Felicitari!"}
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-slide-description">
+              Datele dumneavoastra s-au inregistrat! Va multumesc!
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button onClick={this.handleClose} color="primary">
+              Continua
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+      )
+    }
     return (
       <div className="divContent">
-        <form className=" formStyle">
-          <label className="labelStyles">
-            Nume:
-            <div className={this.state.isNumeError? "inputError": ""}>
-            <input
-              class="form-control"
-              type="text"
-              name="name"
-              placeholder={this.state.isNumeError? "Mesaj de eroare": ""}
-              onChange={text =>
-                this.setState({
-                  nume: text.target.value,
-                  isNumeError: false
-                })
-              }
-            />
-            </div>
-           
-          </label>
+       
+        {this.state.isError && (
+          <p> Va rugam sa verificati din nou datele introduse! </p>
+        )}
+        {this.state.showDateMedic && (
+          <FormDateMedic date={this._getDateMedic.bind(this)} />
+        )}
+        {this.state.showFormCabinet && (
+          <FormCabinet date={this._getDateCabinet.bind(this)} />
+        )}
 
-          <label className="labelStyles">
-            Prenume:
-            <div className={this.state.isPrenumeError? "inputError": ""}>
-            <input
-              class="form-control"
-              type="text"
-              name="prenume"
-              placeholder={this.state.isPrenumeError? "Mesaj de eroare": ""}
-              onChange={text =>
-                this.setState({
-                  prenume: text.target.value,
-                  isPrenumeError: false
-                })
-              }
-            />
-            </div>
-          </label>
-
-          <br />
-          <label className="labelStyles">
-            Adresa:
-            <div className={this.state.isAdresaError? "inputError": ""}>
-            <input
-              class="form-control"
-              type="text"
-              name="adresa"
-              placeholder={this.state.isAdresaError? "Mesaj de eroare": ""}
-              onChange={text =>
-                this.setState({
-                  adresa: text.target.value,
-                  isAdresaError: false
-                })
-              }
-            />
-            </div>
-             
-          </label>
-
-          <label className="labelStyles">
-            E-mail:
-            <div className={this.state.isEmailError? "inputError": ""}>
-            <input
-              class="form-control"
-              type="e-mail"
-              name="email"
-              placeholder={this.state.isEmailError? "Mesaj de eroare": ""}
-              onChange={text =>
-                this.setState({
-                  email: text.target.value,
-                  isEmailError: false
-                })
-              }
-            />
-             </div>
-          </label>
-
-          <label className="labelStyles">
-            Nr. telefon:
-            <div className={this.state.isNrtelError? "inputError": ""}>
-
-            <input 
-              class="form-control"
-              type="text"
-              name="telefon"
-              placeholder={this.state.isNrtelError? "Mesaj de eroare": ""}
-              onChange={text =>
-                this.setState({
-                  nr: text.target.value,
-                  isNrtelError: false
-                })
-              }
-            />
-            </div>
-            
-          </label>
-
-          <br />
-          <label className="labelStyles">
-            Specializare:
-            
-            <select className="specializariStyle">
-              <option>pediatru</option>
-              <option>chirurg</option>
-              <option>dentist</option>
-              <option>4</option>
-
-              onChange={text =>
-                this.setState({
-                  specializare: text.target.value,
-                  isSpecializare: false
-                })
-              }
-      </select>
-      
-          </label>
-          
-
-          <label className="labelStyles">
-            Denumire cabinet:
-            <input class="form-control" type="text" name="denumirecab" />
-          </label>
-          <br />
-
-          <Button
-            bsStyle=""
-            bsSize="lg"
-            className="btnStyle"
-            onClick={() => this._onLoginPress()}
-          >
-            Save
-          </Button>
-        </form>
       </div>
     );
   }
-  _validation() {
-    if (this.state.nume === null || this.state.nume === "") {
-      this.setState({ isNumeError: true });
-    }
 
-    if (this.state.prenume === null || this.state.prenume === "") {
-      this.setState({ isPrenumeError: true });
+  _getDateCabinet = dateCabinet => {
+    let valid = this._validation2(dateCabinet);
+    if (valid) {
+      this.setState({ dateCabinet: dateCabinet });
+    } else {
+      this.setState({ isError: true });
     }
+    this._onPress(dateCabinet);
 
-    if (this.state.adresa === null || this.state.adresa === "") {
-      this.setState({ isAdresaError: true });
-    }
-    if(!this.validateEmail(this.state.email)){
-      this.setState({isEmailError:true, emailErrMsg:"Email invalid"})
-    }
+    console.log("__ getDateCabinet __");
+    // this.props.history.push('/');
+  };
 
-    if (this.state.email === null || this.state.email === "") {
-      this.setState({ isEmailError: true, emailErrMsg:"Introduceti adresa de mail"});
+  _getDateMedic = dateMedic => {
+    let valid = this._validation(dateMedic);
+    if (valid) {
+      this.setState({
+        dateMedic: dateMedic,
+        showDateMedic: false,
+        showFormCabinet: true,
+        isError: false
+      });
+    } else {
+      this.setState({ isError: true });
     }
+  };
 
-    if (this.state.nr === null || this.state.nr === "") {
-      this.setState({ isNrtelError: true });
+  _validation(date) {
+    if (
+      date.nume === null ||
+      date.nume === "" ||
+      date.prenume === null ||
+      date.prenume === "" ||
+      date.email === null ||
+      date.email === "" ||
+      !this.validateEmail(date.email) ||
+      date.numarTelefon === null ||
+      date.numarTelefon === "" ||
+      !this.validareTel(date.numarTelefon)
+    ) {
+      return false;
     }
-
-    if (this.state.specializare === null || this.state.specializare === "") {
-      this.setState({ isSpecializare: true });
+    return true;
+  }
+  _validation2(date) {
+    if (
+      date.denumire === null ||
+      date.denumire === "" ||
+      date.adresaCab === null ||
+      date.adresaCab === ""
+    ) {
+      return false;
     }
+    return true;
   }
 
-  _onLoginPress() {
+ async _onPress(date) {
     try {
-      if (!this._validation()) {
-        throw new Error("Try again!");
+      let listaNR=[];
+      listaNR.push(this.state.dateMedic.numarTelefon);
+
+      let listaSpec=[];
+      listaSpec.push(this.state.dateMedic.specializare);
+
+      let listaCabinet=[];
+     let response= await fetch("http://localhost:8080/medic/add", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: this.props.token
+        },
+        body: JSON.stringify({
+          nume:this.state.dateMedic.nume,
+          prenume:this.state.dateMedic.prenume,
+          numereTel:listaNR,
+          email:this.state.dateMedic.email,
+          facebook:this.state.dateMedic.facebook,
+          specializare:listaSpec,
+          cabinete:[
+          {
+            cabAdress:date.adresaCab,
+            tip:date.tip,
+            denumire:date.denumire
+          }
+          ]
+        })
+      })
+      if(response.status!=201){
+        throw new Error(response);
+      } else{
+        this.setState({Success:true})
       }
-      this._callApi();
     } catch (error) {
       console.log(error.message);
+      this.setState({isError:true})
     }
+
   }
 
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
+  }
+  validareTel(telefon) {
+    if (telefon.length !== 10 || isNaN(telefon)) {
+      return false;
+    }
+    return true;
+  }
 }
+function Transition(props) {
+  return <Slide direction="up" {...props} />;
 }
-export default RecMediciForm;
+export default withRouter(RecMediciForm);

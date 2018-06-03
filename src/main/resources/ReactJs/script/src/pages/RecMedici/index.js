@@ -4,6 +4,8 @@ import 'bootstrap/dist/css/bootstrap-theme.css';
 import Header from '../../componente/Header/index';
 import RecMediciForm from '../../componente/RecMediciForm/index';
 import './styles.css';
+import { connect } from 'react-redux';
+
 
 class RecMedici extends Component {
     
@@ -12,11 +14,16 @@ class RecMedici extends Component {
             <div className="divRecMedici">
                 <Header isLoginPage={true}/>
                 <h1 className="pageRecMediciTitle" > Inregistrare medic</h1>
-                <RecMediciForm/>
+                <RecMediciForm token={this.props.authInfo.token}/>
             </div>
 
         );
       }
 
     }
-    export default RecMedici;
+    function mapStateToProps(state){
+        return {
+          authInfo:state.authReducer
+        };
+      }
+    export default connect(mapStateToProps) (RecMedici);

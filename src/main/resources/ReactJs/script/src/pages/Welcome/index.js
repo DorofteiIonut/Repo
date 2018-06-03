@@ -14,6 +14,7 @@ class Welcome extends Component {
   }
 
   render() {
+    console.log(JSON.stringify(this.props.authInfo)+"______-");
     return (
       <div className="divContainerWelcomePage">
         <div className="hederWelcomePage">
