@@ -90,13 +90,20 @@ class ProfilCabinet extends Component {
                 <p>Denumire: {this.props.profilCabinet.dateCabinet.denumire} </p>
                 <p>Adresa: {this.props.profilCabinet.dateCabinet.adresa} </p>
                 <p>Tip:{this.props.profilCabinet.dateCabinet.tip} </p>
-                <p>Medici: {this.props.profilCabinet.dateCabinet.listaMedici} </p>
+                <p>Medici: {this.renderListaMedici()} </p>
               </div>
           </div>
         </div>
       </div>
     );
   }
+}
+renderListaMedici(){
+  let listaMed=[];
+  for(let i=0; i<this.props.profilCabinet.dateCabinet.listaMedici.length; i++){
+    listaMed.push(<p>{this.props.profilCabinet.dateCabinet.listaMedici[i]}</p>)
+  }
+  return listaMed;
 }
 }
 
