@@ -1,0 +1,25 @@
+.divPrincipal{
+    margin-left: 15%;
+    background-color: azure;
+    height: 60vh;
+    margin-right: 15%;
+    border-radius: 5%;
+    padding: 2%;
+}
+.divTextComentariu{
+    width: 100%;
+    padding: 3%;
+    margin-left: 15%;
+
+}
+.divNote{
+width: 20%;
+
+}
+.pTitluNote{
+    font-weight: bold;
+}
+.stilChenarComentarii{
+    width: 60%;
+    margin-right: 20%;
+}
