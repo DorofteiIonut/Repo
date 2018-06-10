@@ -14,8 +14,8 @@ class Recenzie extends Component {
         return (
             <div className="divRecenzie">
                 <Header />
-                <h1 > Recenzii</h1>
-               <RecenzieForm/>
+               
+               <RecenzieForm token={this.props.authInfo.token} username={this.props.authInfo.username} idMed={this.props.location.state.idRecenzie}/>
             </div>
             
 

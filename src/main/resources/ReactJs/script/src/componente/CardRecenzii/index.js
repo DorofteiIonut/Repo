@@ -9,7 +9,6 @@ import PropTypes from 'prop-types';
 class CardRecenzii extends Component{
    
     render(){
-        console.log(JSON.stringify(this.props.recenzieModel)+"   recenzie obiect")
         return(
             <div className="divCartonasRecenzie">
                 <div className="infoRecenzie">

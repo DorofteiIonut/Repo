@@ -180,7 +180,6 @@ class ProfilMedic extends Component {
   renderlistaRecenzii() {
     let listaRec = [];
     for (let i = 0;i <this.props.recenzieMedic.listaRecenziiMedici.length; i++) {
-      console.log(JSON.stringify(this.props.recenzieMedic.listaRecenziiMedici[i]))
       listaRec.push(
       <CardRecenzii
        recenzieModel={this.props.recenzieMedic.listaRecenziiMedici[i]} />);
