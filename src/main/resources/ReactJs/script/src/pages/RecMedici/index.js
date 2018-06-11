@@ -13,7 +13,7 @@ class RecMedici extends Component {
         return (
             <div className="divRecMedici">
                 <Header isLoginPage={true}/>
-                <h1 className="pageRecMediciTitle" > Inregistrare medic</h1>
+                <h1 className="pageRecMediciTitle" > Înregistrează-te ca medic pe platforma noastra!</h1>
                 <RecMediciForm token={this.props.authInfo.token}/>
             </div>
 

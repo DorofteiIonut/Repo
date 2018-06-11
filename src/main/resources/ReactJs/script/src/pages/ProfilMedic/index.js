@@ -125,12 +125,12 @@ class ProfilMedic extends Component {
               <div className="stilChenar">
                 <p>
                   {" "}
-                  Specializare:{
+                  Specializare: {
                     this.props.profilMedic.dateMedic.specializare
                   }{" "}
                 </p>
                 <p> Cabinet: {this.props.profilMedic.dateMedic.adresaCab} </p>
-                <p>Orar:{this.props.profilMedic.dateMedic.program} </p>
+                <p>Orar: {this.props.profilMedic.dateMedic.program} </p>
                 <p> Email: {this.props.profilMedic.dateMedic.email} </p>
                 <p> Telefon: {this.renderNrTel()}</p>
                 <p> Facebook: {this.props.profilMedic.dateMedic.facebook} </p>

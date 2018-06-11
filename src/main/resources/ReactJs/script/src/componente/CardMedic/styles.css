@@ -1,13 +1,14 @@
 .divCardMed{
     background-color: rgba(59, 228, 149, 0.363);
     width:60%;
-    height: 35%;
+    height: 50%;
     margin: auto;
     margin-bottom: 2%;
     border-radius: 5%;
 }
-.divImagine{    margin-top: 4%;
-    width: 15%;
+.divImagine{   
+     margin-top: 4%;
+    width: 20%;
     height: 50%;
     margin-left: 2%;
     float: left;

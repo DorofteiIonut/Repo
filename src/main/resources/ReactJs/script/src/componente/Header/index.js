@@ -66,7 +66,7 @@ class Header extends Component {
                 !this.props.isLoginPage &&
                 !this.props.isSignUp && (
                   <li>
-                    <Link to={"/recmedici"}>Inregistrare ca medic</Link>
+                    <Link to={"/recmedici"}>Înregistrare ca medic</Link>
                   </li>
                 )}
             </ul>

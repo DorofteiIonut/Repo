@@ -82,7 +82,9 @@ class TextFieldGroup extends Component {
             onClick={() => this._onLoginPress()}
             >
               Log in
+              <div className="divIcon">
               <Icon><img src={require("../../assets/download.png")} className="styleIcon" alt="load"/></Icon>
+              </div>
               </Button>
           </div>
           }
