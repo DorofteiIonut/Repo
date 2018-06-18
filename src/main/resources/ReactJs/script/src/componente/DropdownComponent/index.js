@@ -8,9 +8,7 @@ import setSpecializare from "../../commun/ReduxActions/SetSpecializareAction";
 import {bindActionCreators} from 'redux'; 
 
 class Dropdown extends Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     return <div className="headerDiv">{this.dropDown()}</div>;

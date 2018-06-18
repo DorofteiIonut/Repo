@@ -28,6 +28,15 @@ class Header extends Component {
               <li>
                 <Link to={"/"}>Welcome Page</Link>
               </li>
+
+                 {this.props.isMedic &&!this.props.isWelcomePage &&
+                !this.props.isLoginPage &&
+                !this.props.isSignUp &&
+                (
+                  <li>
+                    <Link to={"/workpanel"}>Profilul meu</Link>
+                  </li>
+                )}
               {!this.props.isWelcomePage &&
                 !this.props.isLoginPage &&
                 !this.props.isSignUp && (
@@ -62,13 +71,15 @@ class Header extends Component {
                   </li>
                 )}
 
-              {!this.props.isWelcomePage &&
+              { !this.props.isMedic &&
+                !this.props.isWelcomePage &&
                 !this.props.isLoginPage &&
                 !this.props.isSignUp && (
                   <li>
                     <Link to={"/recmedici"}>Înregistrare ca medic</Link>
                   </li>
                 )}
+                
             </ul>
           </div>
         </nav>

@@ -10,7 +10,7 @@ class CardRecenzii extends Component{
    
     render(){
         
-        if(this.props.recenzieModel.descriere!=null && this.props.recenzieModel.descriere!=""){
+        if(this.props.recenzieModel.descriere!==null && this.props.recenzieModel.descriere!==""){
             let data=new Date(this.props.recenzieModel.dataRecenzie);
             let formatedDate=data.getDate() +"-"+data.getMonth()+ "-"+data.getFullYear();
         return(

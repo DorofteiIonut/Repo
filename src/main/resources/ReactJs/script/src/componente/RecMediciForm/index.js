@@ -14,7 +14,6 @@ import Dialog, {
 } from "material-ui/Dialog";
 import Slide from "material-ui/transitions/Slide";
 
-
 class RecMediciForm extends Component {
   constructor(props) {
     super(props);
@@ -29,48 +28,42 @@ class RecMediciForm extends Component {
     };
   }
   handleClose = () => {
+    this.updateRole();
     this.setState({ Success: false });
     this.props.history.push("/");
-  }
+  };
 
   render() {
-    console.log(
-      JSON.stringify(this.state.dateMedic) +
-        "____" +
-        JSON.stringify(this.state.dateCabinet)
-      
-    );
-    if(this.state.Success){
+    if (this.state.Success) {
       return (
         <div>
-        <Dialog
-          open={this.state.Success}
-          transition={Transition}
-          keepMounted
-          onClose={this.handleClose}
-          aria-labelledby="alert-dialog-slide-title"
-          aria-describedby="alert-dialog-slide-description"
-        >
-          <DialogTitle id="alert-dialog-slide-title">
-            {"Felicitari!"}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText id="alert-dialog-slide-description">
-              Datele dumneavoastra s-au inregistrat! Va multumesc!
-            </DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={this.handleClose} color="primary">
-              Continua
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-      )
+          <Dialog
+            open={this.state.Success}
+            transition={Transition}
+            keepMounted
+            onClose={this.handleClose}
+            aria-labelledby="alert-dialog-slide-title"
+            aria-describedby="alert-dialog-slide-description"
+          >
+            <DialogTitle id="alert-dialog-slide-title">
+              {"Felicitari!"}
+            </DialogTitle>
+            <DialogContent>
+              <DialogContentText id="alert-dialog-slide-description">
+                Datele dumneavoastra s-au inregistrat! Va multumesc!
+              </DialogContentText>
+            </DialogContent>
+            <DialogActions>
+              <Button onClick={this.handleClose} color="primary">
+                Continua
+              </Button>
+            </DialogActions>
+          </Dialog>
+        </div>
+      );
     }
     return (
       <div className="divContent">
-       
         {this.state.isError && (
           <p> Va rugam sa verificati din nou datele introduse! </p>
         )}
@@ -80,7 +73,6 @@ class RecMediciForm extends Component {
         {this.state.showFormCabinet && (
           <FormCabinet date={this._getDateCabinet.bind(this)} />
         )}
-
       </div>
     );
   }
@@ -93,9 +85,6 @@ class RecMediciForm extends Component {
       this.setState({ isError: true });
     }
     this._onPress(dateCabinet);
-
-    console.log("__ getDateCabinet __");
-    // this.props.history.push('/');
   };
 
   _getDateMedic = dateMedic => {
@@ -141,47 +130,61 @@ class RecMediciForm extends Component {
     return true;
   }
 
- async _onPress(date) {
+  async _onPress(date) {
     try {
-      let listaNR=[];
+      let listaNR = [];
       listaNR.push(this.state.dateMedic.numarTelefon);
 
-      let listaSpec=[];
+      let listaSpec = [];
       listaSpec.push(this.state.dateMedic.specializare);
 
-      let listaCabinet=[];
-     let response= await fetch("http://localhost:8080/medic/add", {
+      let listaCabinet = [];
+      let response = await fetch("http://localhost:8080/medic/add", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
           Authorization: this.props.token
         },
         body: JSON.stringify({
-          nume:this.state.dateMedic.nume,
-          prenume:this.state.dateMedic.prenume,
-          numereTel:listaNR,
-          email:this.state.dateMedic.email,
-          facebook:this.state.dateMedic.facebook,
-          specializare:listaSpec,
-          cabinete:[
-          {
-            cabAdress:date.adresaCab,
-            tip:date.tip,
-            denumire:date.denumire
-          }
+          nume: this.state.dateMedic.nume,
+          prenume: this.state.dateMedic.prenume,
+          numereTel: listaNR,
+          email: this.state.dateMedic.email,
+          facebook: this.state.dateMedic.facebook,
+          specializare: listaSpec,
+          cabinete: [
+            {
+              cabAdress: date.adresaCab,
+              tip: date.tip,
+              denumire: date.denumire
+            }
           ]
         })
-      })
-      if(response.status!=201){
-        throw new Error(response);
-      } else{
-        this.setState({Success:true})
+      });
+
+      if (response.status != 201) {
+        throw new Error("Error");
+      } else {
+        this.setState({ Success: true });
       }
     } catch (error) {
-      console.log(error.message);
-      this.setState({isError:true})
+      this.setState({ isError: true });
     }
+  }
 
+  async updateRole() {
+    try {
+      const url = "http://localhost:8080/" + this.props.username + "/addRole";
+      let resp = await fetch(url, {
+        method: "POST",
+        headers: {
+          Authorization: this.props.token,
+          "Content-Type": "application/json"
+        }
+      });
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   validateEmail(email) {

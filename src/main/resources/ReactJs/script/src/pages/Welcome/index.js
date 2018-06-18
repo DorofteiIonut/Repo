@@ -5,6 +5,7 @@ import Header from "../../componente/Header/index";
 import "./styles.css";
 import { connect } from "react-redux";
 import specializareList from "../../commun/ReduxActions/SpecializariAction";
+import setStatus from "../../commun/ReduxActions/SetStatusAction";
 import { bindActionCreators } from "redux";
 import Coverflow from "react-coverflow";
 
@@ -14,10 +15,12 @@ class Welcome extends Component {
   }
 
   render() {
+    
     return (
       <div className="divContainerWelcomePage">
         <div className="hederWelcomePage">
           <Header
+          isMedic={this.props.authInfo.isMedic}
             isWelcomePage={this.props.authInfo.token == null ? true : false}
           />
         </div>
@@ -76,7 +79,9 @@ class Welcome extends Component {
 
   async loadData() {
     await this.props.specializareList(this.props.authInfo.token);
+    await this.props.setStatus(this.props.authInfo.token,this.props.authInfo.username);
   }
+  
 }
 function mapStateToProps(state) {
   return {
@@ -87,7 +92,8 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
-    { specializareList: token => specializareList(token) },
+    { specializareList: token => specializareList(token) ,
+      setStatus:(token,username)=>setStatus(token,username)},
     dispatch
   );
 }

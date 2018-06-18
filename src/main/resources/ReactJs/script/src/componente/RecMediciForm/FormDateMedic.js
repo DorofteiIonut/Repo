@@ -22,7 +22,6 @@ class DateMedic extends Component {
       email: null,
       nr: null,
       specializare: null,
-      emailErrMsg: "Invalid"
     };
   }
   render() {
