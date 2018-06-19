@@ -12,7 +12,11 @@ class CardWorkPanel extends Component{
         
         return(
             <div className="divCartonasWorkPanel">
-               <p className="styleDatePacient">Datele pacientului!!</p>
+               <p>Data: {this.props.dataProgramare}</p>
+               <p>Nume: {this.props.firstname}</p>
+               <p>Prenume: {this.props.lastname}</p>
+               <p>E-mail: {this.props.mail}</p>
+               <p>Numar telefon: {this.props.tel}</p>
                 </div>
         );
     }

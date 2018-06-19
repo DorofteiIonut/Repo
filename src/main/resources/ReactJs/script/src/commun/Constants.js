@@ -44,6 +44,9 @@
     GET_PROFILCABINET_FAILURE:"GET_PROFILCABINET_ERROR",   
     //set status
     SET_STATUS:"SET_STATUS",
+    //set id medic
+    SET_ID_MED:"SET_ID_MED",
+    
 }
 
 export default appConstants;

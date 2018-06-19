@@ -10,11 +10,13 @@ class Header extends Component {
     super(props);
 
     this.state = {
-      drop: false
+      drop: false,
+      
     };
   }
 
   render() {
+    console.log(this.props.isMedic + " is Medic");
     return (
       <div className="headerContainerDiv">
         <nav class="navbar navbar-inverse">
@@ -28,15 +30,26 @@ class Header extends Component {
               <li>
                 <Link to={"/"}>Welcome Page</Link>
               </li>
-
-                 {this.props.isMedic &&!this.props.isWelcomePage &&
+                  
+                 { this.props.isMedic && !this.props.isWelcomePage &&
                 !this.props.isLoginPage &&
-                !this.props.isSignUp &&
+                !this.props.isSignUp && 
                 (
                   <li>
+                    
                     <Link to={"/workpanel"}>Profilul meu</Link>
                   </li>
                 )}
+
+                 { !this.props.isMedic &&
+                !this.props.isWelcomePage &&
+                !this.props.isLoginPage &&
+                !this.props.isSignUp && (
+                  <li>
+                    <Link to={"/recmedici"}>Înregistrare ca medic</Link>
+                  </li>
+                )}
+
               {!this.props.isWelcomePage &&
                 !this.props.isLoginPage &&
                 !this.props.isSignUp && (
@@ -71,14 +84,7 @@ class Header extends Component {
                   </li>
                 )}
 
-              { !this.props.isMedic &&
-                !this.props.isWelcomePage &&
-                !this.props.isLoginPage &&
-                !this.props.isSignUp && (
-                  <li>
-                    <Link to={"/recmedici"}>Înregistrare ca medic</Link>
-                  </li>
-                )}
+             
                 
             </ul>
           </div>

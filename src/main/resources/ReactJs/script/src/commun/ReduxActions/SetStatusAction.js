@@ -13,7 +13,14 @@ export default function setStatus(token,username) {
           "Content-Type": "application/json"
         }
       });
-      console.log(resp.status)
+      
+      const json=await resp.json();
+      
+      if(resp.status==302 || json!==null){
+        dispatch({ type: appConstants.SET_ID_MED, payload:json })
+        console.log(json, "json setstatus2")
+      }
+
       if (resp.status !== 200) {
         throw new Error("isMedic");
       }

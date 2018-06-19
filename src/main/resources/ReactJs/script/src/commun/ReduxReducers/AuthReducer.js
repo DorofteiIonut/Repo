@@ -5,7 +5,8 @@ export const initialState = {
    token:null,
    error:null,
    username:null,
-   isMedic:false
+   isMedic:false,
+   idMedic:null,
 };
  
 export default function loginReducer(state = initialState, action) {
@@ -16,7 +17,8 @@ export default function loginReducer(state = initialState, action) {
                 inProgress:true,
                 token:null,
                 error:null,
-                isMedic:false
+                isMedic:false,
+                idMedic:null
 
             };
             break;
@@ -26,6 +28,7 @@ export default function loginReducer(state = initialState, action) {
                 ...state,
                 inProgress:false,
                 token:action.payload,
+                
             };
             break;
            } 
@@ -38,6 +41,7 @@ export default function loginReducer(state = initialState, action) {
             break;
            }
            case loginConstants.ADD_USERNAME:{
+
                state={
                    ...state,
                    username:action.payload,
@@ -45,11 +49,18 @@ export default function loginReducer(state = initialState, action) {
                break;
            }
            case loginConstants.SET_STATUS:{
-               state={
+                   state={
                    ...state,
                    isMedic:true,
                }
                break;
+           }
+
+           case loginConstants.SET_ID_MED:{
+               state={
+                   ...state,
+                   idMedic:action.payload,
+               }
            }
     }
     return state;

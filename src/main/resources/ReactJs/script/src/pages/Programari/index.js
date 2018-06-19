@@ -10,16 +10,16 @@ import { connect } from 'react-redux';
 class Programari extends Component {
 
      render() {
-
         return (
             <div className="divProgramari">
                 <Header />
                 <h1 className="pageProgramariTitle"> Programari</h1>
-                <ProgramariForm token={this.props.authInfo.token}/>
+                <ProgramariForm token={this.props.authInfo.token} idMedic={this.props.location.state.idRezervare}/>
             </div>
 
         );
       }
+      
     }
     function mapStateToProps(state){
         return {

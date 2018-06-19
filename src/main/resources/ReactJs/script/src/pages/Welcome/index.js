@@ -93,7 +93,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators(
     { specializareList: token => specializareList(token) ,
-      setStatus:(token,username)=>setStatus(token,username)},
+      setStatus:(token,username)=>setStatus(token,username)}, 
     dispatch
   );
 }

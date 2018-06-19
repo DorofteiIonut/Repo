@@ -13,13 +13,18 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.licenta.SpringBoot.Models.ApplicationUserModel.ApplicationUser;
+import com.licenta.SpringBoot.Models.MediciModel.MediciModel;
 import com.licenta.SpringBoot.Repositorys.ApplicationUserRepo.ApplicationUserRepository;
+import com.licenta.SpringBoot.Services.MediciServices.MediciServices;
 
 @RestController
 public class ApplicationUserController {
 	
 	@Autowired
 	private ApplicationUserRepository userRepo;
+	
+	@Autowired
+	private MediciServices mediciservicii;
 	
 	@CrossOrigin(origins = "http://localhost:3000")
 	@RequestMapping(value="/sign-up", method=RequestMethod.POST)
@@ -36,13 +41,22 @@ public class ApplicationUserController {
 	@RequestMapping(value="/{userName}/checkRole", method=RequestMethod.GET)
 	public ResponseEntity<?> check(@PathVariable("userName") String userName) {
 		ApplicationUser appUser= userRepo.findByUsername(userName);
+		long idMedic=0;
+		try {
+		MediciModel medic=mediciservicii.getidMed(userName);
+		idMedic=medic.getIdMed();
+		}catch(Exception e) {
+			System.out.println("Exception:" +e.getMessage());
+		
+		}
+		
 		if(appUser.getRol()==null) {
-			System.out.println(appUser.toString()+ "-------"+ HttpStatus.OK);
+			
 			return new ResponseEntity<>(HttpStatus.OK);
 		}
 		else {
-			System.out.println(appUser.toString()+ "----ELSE---"+ HttpStatus.UNAVAILABLE_FOR_LEGAL_REASONS);
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+			
+			return new ResponseEntity<Long>(idMedic ,HttpStatus.FOUND);
 		}
 	}
 	@CrossOrigin(origins = "http://localhost:3000")
