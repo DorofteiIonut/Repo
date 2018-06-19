@@ -68,6 +68,7 @@ class ProgramariForm extends Component {
   };
 
   render() {
+   
     const { anchorEl } = this.state;
     if (this.state.inProgress) {
       return <Progress />;
@@ -103,6 +104,7 @@ class ProgramariForm extends Component {
     }
     if (this.state.data === null) {
       return (
+        
         <div className="calendar">
           <Calendar
             onClickDay={data => {
@@ -313,16 +315,18 @@ class ProgramariForm extends Component {
   }
 
   _validation() {
+   
+  
     if (
-      this.state.nume === null || this.state.nume === "" ||
+    this.state.nume === null || this.state.nume === "" ||
     this.state.prenume === null || this.state.prenume === "" ||
     this.state.telefon === null || this.state.telefon === "" ||
     !this.validareTel(this.state.telefon) ||  
     this.state.email === null || this.state.email=== "" ||
     !this.validateEmail(this.state.email) ||
     this.state.ora === null || this.state.ora === "" || 
-    this.state.data === null || this.state.data === "" ||
-    !this.validareData(this.state.data) 
+    this.state.data === null || this.state.data === ""
+    
 
   ) {
       return false;
@@ -333,6 +337,7 @@ class ProgramariForm extends Component {
 
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  
     return re.test(String(email).toLowerCase());
   }
   validareTel(telefon) {
@@ -342,13 +347,10 @@ class ProgramariForm extends Component {
   
     return true;
   }
-  validareData(data) {
-    var re = /^(?:(?:31(\/|-|\.)(?:0?[13578]|1[02]))\1|(?:(?:29|30)(\/|-|\.)(?:0?[1,3-9]|1[0-2])\2))(?:(?:1[6-9]|[2-9]\d)?\d{2})$|^(?:29(\/|-|\.)0?2\3(?:(?:(?:1[6-9]|[2-9]\d)?(?:0[48]|[2468][048]|[13579][26])|(?:(?:16|[2468][048]|[3579][26])00))))$|^(?:0?[1-9]|1\d|2[0-8])(\/|-|\.)(?:(?:0?[1-9])|(?:1[0-2]))\4(?:(?:1[6-9]|[2-9]\d)?\d{2})$/;
-    return re.test(String(data).toLowerCase());
-  }
+ 
 
   _onSavePress() {
-    
+   
       if (this._validation()) {
       
         let conversieData =
@@ -363,8 +365,10 @@ class ProgramariForm extends Component {
           email: this.state.email,
           nrtel: this.state.telefon,
           medic: {
-            idMed: this.props.location.state.idRezervare
+            idMed: this.props.idMedic
+            
           }
+          
         };
         this._callAPI(programare);
       } else{
@@ -373,6 +377,7 @@ class ProgramariForm extends Component {
   }
 
   async _callAPI(programObj) {
+    
     this.setState({ inProgress: true });
     try {
       const resp = await fetch(Api.addProgramare, {
@@ -390,6 +395,7 @@ class ProgramariForm extends Component {
           medic: programObj.medic
         })
       });
+     
       if (resp.status !== 201) {
         throw new Error(JSON.stringify(resp));
       }

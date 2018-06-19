@@ -78,6 +78,7 @@ class RecMediciForm extends Component {
   }
 
   _getDateCabinet = dateCabinet => {
+    console.log(this._validation2(dateCabinet)+" validare medic 2")
     let valid = this._validation2(dateCabinet);
     if (valid) {
       this.setState({ dateCabinet: dateCabinet });
@@ -88,6 +89,7 @@ class RecMediciForm extends Component {
   };
 
   _getDateMedic = dateMedic => {
+    console.log(this._validation(dateMedic)+" validare medic")
     let valid = this._validation(dateMedic);
     if (valid) {
       this.setState({
@@ -102,6 +104,8 @@ class RecMediciForm extends Component {
   };
 
   _validation(date) {
+    console.log(this.validateEmail(date.email)+" validare mail")
+    console.log(this.validareTel(date.numarTelefon)+" validare telefon")
     if (
       date.nume === null ||
       date.nume === "" ||
@@ -152,6 +156,7 @@ class RecMediciForm extends Component {
           email: this.state.dateMedic.email,
           facebook: this.state.dateMedic.facebook,
           specializare: listaSpec,
+          applicationUser:this.props.username,
           cabinete: [
             {
               cabAdress: date.adresaCab,
@@ -185,12 +190,14 @@ class RecMediciForm extends Component {
     } catch (error) {
       console.log(error);
     }
+   
   }
 
   validateEmail(email) {
     var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     return re.test(String(email).toLowerCase());
   }
+  
   validareTel(telefon) {
     if (telefon.length !== 10 || isNaN(telefon)) {
       return false;

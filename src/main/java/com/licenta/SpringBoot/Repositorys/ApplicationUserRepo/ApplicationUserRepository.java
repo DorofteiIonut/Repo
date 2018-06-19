@@ -7,5 +7,6 @@ import com.licenta.SpringBoot.Models.ApplicationUserModel.ApplicationUser;
 public interface ApplicationUserRepository extends CrudRepository<ApplicationUser, Long>{
 	
 	ApplicationUser findByUsername(String username);
+	
 
 }

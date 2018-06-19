@@ -16,7 +16,7 @@ class Dropdown extends Component {
 
  async onClick(specializare) {
     await this.props.setSpecializare(specializare);
-    console.log("onclick--"+JSON.stringify(this.props.specializareRedux));
+    
     if(this.props.specializareRedux.specializareSelectata!==null){
       this.props.history.push('/medici');
     }

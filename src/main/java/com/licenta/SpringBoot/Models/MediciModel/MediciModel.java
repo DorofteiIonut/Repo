@@ -51,6 +51,9 @@ public class MediciModel {
 	@Column(unique=true, name="FACEBOOK")
 	private String facebook;
 	
+	@Column(unique=true, name="APPLICATIONUSER")
+	private String applicationUser;
+	
 	@ManyToMany
 	@JoinTable(name = "MEDICI_CABINET", 
 		joinColumns = @JoinColumn(name = "IDMED", referencedColumnName = "IDMED"), 
@@ -215,6 +218,16 @@ public class MediciModel {
 		this.servicii = servicii;
 		this.programari = programari;
 		this.recenzii = recenzii;
+	}
+
+	
+	public String getApplicationUser() {
+		return applicationUser;
+	}
+
+
+	public void setApplicationUser(String applicationUser) {
+		this.applicationUser = applicationUser;
 	}
 
 

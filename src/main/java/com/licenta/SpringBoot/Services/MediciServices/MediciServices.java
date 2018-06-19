@@ -60,6 +60,13 @@ public class MediciServices {
 		mediciRepo.delete(med);
 	}
 	
+	public MediciModel getidMed(String username) {
+		MediciModel medId=new MediciModel();
+		MediciModel medic=mediciRepo.findByApplicationUser(username);
+		medId.setIdMed(medic.getIdMed());
+		return medId;
+	}
+	
 	public ProfilMedic getMedic(long id) {
 		ProfilMedic profilMedic=new ProfilMedic();
 		MediciModel obiect=mediciRepo.findOne(id);
@@ -102,6 +109,8 @@ public class MediciServices {
 		return profilMedic;
 	}
 	
+	
+	
 	public List<SpecializareMedici> selectMedici(String specializare) { 
 		List<SpecializareMedici> listaMedici=new ArrayList<>();
 		List<MediciModel> listaSpecializareMedic=mediciRepo.findBySpecializare(specializare);
@@ -131,4 +140,6 @@ public class MediciServices {
 		}
 		return listaMedici;
 	}
+	
+	
 }

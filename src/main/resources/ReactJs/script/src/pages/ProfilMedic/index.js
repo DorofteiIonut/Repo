@@ -16,7 +16,7 @@ class ProfilMedic extends Component {
   async componentWillMount() {
     await this.props.medicProfil(
       this.props.authInfo.token,
-      this.props.location.state.detail
+      this.props.location.state.detail,
     );
     await this.props.recenziiMediciAction(
       this.props.authInfo.token,
@@ -178,15 +178,18 @@ class ProfilMedic extends Component {
   onClick(id) {
     this.props.history.push({
       pathname: "/programari",
-      state: { idRezervare: id }
+      state: { idRezervare: id } 
     });
+    
   }
 
   onClick2(id){
     this.props.history.push({
       pathname:"/recenzie",
       state:{idRecenzie:id}
+      
     });
+    
   }
   renderlistaRecenzii() {
     let listaRec = [];
