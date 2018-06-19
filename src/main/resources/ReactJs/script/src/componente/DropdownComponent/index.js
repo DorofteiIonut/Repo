@@ -8,9 +8,7 @@ import setSpecializare from "../../commun/ReduxActions/SetSpecializareAction";
 import {bindActionCreators} from 'redux'; 
 
 class Dropdown extends Component {
-  constructor(props) {
-    super(props);
-  }
+
 
   render() {
     return <div className="headerDiv">{this.dropDown()}</div>;
@@ -28,9 +26,10 @@ class Dropdown extends Component {
     let listaSpec = [];
     let nrSpec = this.props.specializareRedux.specializareList.length;
     for (let i = 0; i < nrSpec; i++) {
+      let specializare=this.props.specializareRedux.specializareList[i].denumireSpecializare;
       listaSpec.push(
         <div>
-              <p onClick={()=>this.onClick(this.props.specializareRedux.specializareList[i].denumireSpecializare)}>{this.props.specializareRedux.specializareList[i].denumireSpecializare}</p>
+              <p onClick={()=>this.onClick(this.props.specializareRedux.specializareList[i].denumireSpecializare)}>{specializare.charAt(0).toUpperCase()+specializare.slice(1)}</p>
         </div>
       );
     }

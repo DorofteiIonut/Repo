@@ -5,6 +5,7 @@ export const initialState = {
    token:null,
    error:null,
    username:null,
+   isMedic:false
 };
  
 export default function loginReducer(state = initialState, action) {
@@ -15,6 +16,8 @@ export default function loginReducer(state = initialState, action) {
                 inProgress:true,
                 token:null,
                 error:null,
+                isMedic:false
+
             };
             break;
         }
@@ -39,6 +42,13 @@ export default function loginReducer(state = initialState, action) {
                    ...state,
                    username:action.payload,
                };
+               break;
+           }
+           case loginConstants.SET_STATUS:{
+               state={
+                   ...state,
+                   isMedic:true,
+               }
                break;
            }
     }

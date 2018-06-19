@@ -13,7 +13,7 @@ class Programari extends Component {
 
         return (
             <div className="divProgramari">
-                <Header isLoginPage={true}/>
+                <Header />
                 <h1 className="pageProgramariTitle"> Programari</h1>
                 <ProgramariForm token={this.props.authInfo.token}/>
             </div>

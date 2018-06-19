@@ -39,7 +39,7 @@ class CardMedic extends Component {
         </div>
 
         <div className="divDate">
-          <p>Nume:{this.props.numeMedic} </p>
+          <p>Nume: {this.props.numeMedic} </p>
           <p>Prenume: {this.props.prenumeMedic} </p>
           <p>Adresa: {this.renderAdrese()} </p>
           <p>Nr. Telefon:{this.renderNrTel()} </p>

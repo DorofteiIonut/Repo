@@ -28,6 +28,7 @@ class ProfilMedic extends Component {
     if (this.props.profilMedic.dateMedic === null || this.props.recenzieMedic.listaRecenziiMedici===null) {
       return <Progress/>;
     } else {
+     
       return (
         <div className="divProfilMedic">
           <div>
@@ -125,12 +126,12 @@ class ProfilMedic extends Component {
               <div className="stilChenar">
                 <p>
                   {" "}
-                  Specializare:{
+                  Specializare: {
                     this.props.profilMedic.dateMedic.specializare
                   }{" "}
                 </p>
                 <p> Cabinet: {this.props.profilMedic.dateMedic.adresaCab} </p>
-                <p>Orar:{this.props.profilMedic.dateMedic.program} </p>
+                <p>Orar: {this.renderOrar()} </p>
                 <p> Email: {this.props.profilMedic.dateMedic.email} </p>
                 <p> Telefon: {this.renderNrTel()}</p>
                 <p> Facebook: {this.props.profilMedic.dateMedic.facebook} </p>
@@ -164,6 +165,16 @@ class ProfilMedic extends Component {
     }
     return list;
   }
+  renderOrar(){
+    let orar=[];
+    for(let i=0;i<this.props.profilMedic.dateMedic.program.length;i++){
+      let data=this.props.profilMedic.dateMedic.program[i];
+      data=data.split(" ");
+      let dataOrar=data[0]+"-"+data[2].slice(0, 5)+"--"+data[4].slice(0, 5);
+      orar.push(<p>{dataOrar}</p>)
+    }
+    return orar;
+  }
   onClick(id) {
     this.props.history.push({
       pathname: "/programari",
@@ -180,7 +191,6 @@ class ProfilMedic extends Component {
   renderlistaRecenzii() {
     let listaRec = [];
     for (let i = 0;i <this.props.recenzieMedic.listaRecenziiMedici.length; i++) {
-      console.log(JSON.stringify(this.props.recenzieMedic.listaRecenziiMedici[i]))
       listaRec.push(
       <CardRecenzii
        recenzieModel={this.props.recenzieMedic.listaRecenziiMedici[i]} />);

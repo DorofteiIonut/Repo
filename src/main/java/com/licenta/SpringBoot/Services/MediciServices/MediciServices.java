@@ -94,7 +94,8 @@ public class MediciServices {
 		Set<ProgramModel> orar=obiect.getProgram();
 		List<String> listaOrar=new ArrayList<>();
 		for(ProgramModel programLucru:orar) {
-			listaOrar.add(programLucru.getZi()+" "+programLucru.getOraStart()+"-"+programLucru.getOraFinal());
+			
+			listaOrar.add(programLucru.getZi()+" "+programLucru.getOraStart()+" "+programLucru.getOraFinal());
 		}
 		profilMedic.setProgram(listaOrar);
 		

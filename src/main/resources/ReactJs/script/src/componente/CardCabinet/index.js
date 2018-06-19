@@ -10,7 +10,7 @@ class CardCabinet extends Component {
     return (
       <div className="divCard">
         <div className="divImgCabinet">
-          <img src={require("../../assets/logo.jpg")} className="imgStyle" />
+          <img src={require("../../assets/avatar.png")} className="imgStyle" />
 
           <Rating
             placeholderRating={3.88}
@@ -36,9 +36,9 @@ class CardCabinet extends Component {
           />
         </div>
         <div className="divDate">
-          <p>Denumire:{this.props.denumireCabinet}</p>
+          <p>Denumire: {this.props.denumireCabinet}</p>
           <p>Adresa: {this.props.adresaCabinet} </p>
-          <p>Tip cabinet:{this.props.tipCabinet}</p>
+          <p>Tip cabinet: {this.props.tipCabinet}</p>
         </div>
         <button
           onClick={() => this.onClick(this.props.idCabinet)}

@@ -16,7 +16,6 @@ export default function recenziiMediciAction(token,id){
         if(json==null || resp.status!==200){
             throw new Error(json);
         }
-        console.log(JSON.stringify(json)+"#######");
         dispach({type:getRecenziiMediciConst.GET_RECENZIIMEDIC_SUCCESS,payload:json});
         } catch (error) {
             dispach({type:getRecenziiMediciConst.GET_RECENZIIMEDIC_FAILURE,payload:error});

@@ -16,7 +16,8 @@ import Select from "material-ui/Select";
 import IconButton from "material-ui/IconButton";
 import Menu, { MenuItem } from "material-ui/Menu";
 import Icon from "material-ui/Icon";
-import Progress from '../../componente/Progress/index';
+import Progress from "../../componente/Progress/index";
+import Api from "../../Api/Api";
 
 const options = ["10:00", "10:30", "11:00", "11:30", "12:00"];
 
@@ -25,12 +26,12 @@ class ProgramariForm extends Component {
     super(props);
 
     this.state = {
-      isNumeClientError: false,
-      isPrenumeClientError: false,
-      isEmailError: false,
-      isTelefonError: false,
-      isDataError: false,
-      isOraError: false,
+      // isNumeClientError: false,
+      // isPrenumeClientError: false,
+      // isEmailError: false,
+      // isTelefonError: false,
+      // isDataError: false,
+      // isOraError: false,
       nume: null,
       prenume: null,
       email: "",
@@ -46,7 +47,10 @@ class ProgramariForm extends Component {
   }
   handleClose = () => {
     this.setState({ signUpSuccess: false });
-    this.props.history.push("/");
+    this.props.history.push({
+      pathname: "/medic",
+      state: { detail: this.props.location.state.idRezervare }
+    });
   };
   handleChange = event => {
     this.setState({ [event.target.name]: event.target.value });
@@ -65,8 +69,8 @@ class ProgramariForm extends Component {
 
   render() {
     const { anchorEl } = this.state;
-    if(this.state.inProgress){
-      return <Progress/>
+    if (this.state.inProgress) {
+      return <Progress />;
     }
 
     if (this.state.programareSuccess) {
@@ -114,9 +118,41 @@ class ProgramariForm extends Component {
         </div>
       );
     }
+
+
+    if(this.state.programareError){
+      return(
+        <div>
+        <Dialog
+        open={this.state.programareError}
+        transition={Transition}
+        keepMounted
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-slide-title"
+        aria-describedby="alert-dialog-slide-description"
+      >
+        <DialogTitle id="alert-dialog-slide-title">
+          {"Ne pare rau!"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-slide-description">
+           S-ar putea ca datele introduse anterior sa fie gresite! Va rugam completati din nou formularul. Va multumim!
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.handleClose} color="primary">
+            Continua
+          </Button>
+        </DialogActions>
+      </Dialog>
+        </div>
+
+      );
+    }
+
     return (
       <div className="divContent">
-        {this.state.programareError && <p className="pErrorProgramariForm">Inregistrarea nu s-a efectuat</p>}
+
         <form className=" formStyle">
           <label className="labelStyles">
             {" "}
@@ -277,59 +313,22 @@ class ProgramariForm extends Component {
   }
 
   _validation() {
-    if (this.state.nume === null || this.state.nume === "") {
-      this.setState({ isNumeClientError: true });
-    }
-
-    if (this.state.prenume === null || this.state.prenume === "") {
-      this.setState({ isPrenumeClientError: true });
-    }
-
-    if (this.state.telefon === null || this.state.telefon === "") {
-      this.setState({ isTelefonError: true });
-    }
-
-    if (!this.validateEmail(this.state.email)) {
-      this.setState({
-        email: "",
-        isEmailError: true
-      });
-    }
-
-    if (this.state.email === null || this.state.email === "") {
-      this.setState({ isEmailError: true });
-    }
-
-    if (this.state.ora === null || this.state.ora === "") {
-      this.setState({ isOraError: true });
-    }
-    if (this.state.data === null || this.state.data === "") {
-      this.setState({ isDataError: true });
-    }
-
-    if (!this.validareData(this.state.data)) {
-      this.setState({
-        data: "",
-        isDataError: true
-      });
-    }
-
-    if (!this.validareTel(this.state.telefon)) {
-      this.setState({
-        telefon: "",
-        isTelefonError: true
-      });
-    }
-
     if (
-      this.state.isEmailError ||
-      this.state.isDataError ||
-      this.state.isNumeClientError
-    ) {
+      this.state.nume === null || this.state.nume === "" ||
+    this.state.prenume === null || this.state.prenume === "" ||
+    this.state.telefon === null || this.state.telefon === "" ||
+    !this.validareTel(this.state.telefon) ||  
+    this.state.email === null || this.state.email=== "" ||
+    !this.validateEmail(this.state.email) ||
+    this.state.ora === null || this.state.ora === "" || 
+    this.state.data === null || this.state.data === "" ||
+    !this.validareData(this.state.data) 
+
+  ) {
       return false;
-    } else {
+  }
       return true;
-    }
+    
   }
 
   validateEmail(email) {
@@ -337,9 +336,10 @@ class ProgramariForm extends Component {
     return re.test(String(email).toLowerCase());
   }
   validareTel(telefon) {
-    if (telefon.length !== 10 || isNaN(telefon)) {
+    if (telefon===null ||telefon.length !== 10 || isNaN(telefon)) {
       return false;
     }
+  
     return true;
   }
   validareData(data) {
@@ -348,9 +348,9 @@ class ProgramariForm extends Component {
   }
 
   _onSavePress() {
-    try {
+    
       if (this._validation()) {
-        //Call Api
+      
         let conversieData =
           this.state.data.length == 4 ? "0" + this.state.data : this.state.data;
         let dateFormat =
@@ -366,39 +366,39 @@ class ProgramariForm extends Component {
             idMed: this.props.location.state.idRezervare
           }
         };
-        let response=this._callAPI(programare);
-        if(response.status!==201){
-          throw new Error(JSON.stringify(response));
-        }
+        this._callAPI(programare);
+      } else{
+        this.setState({programareError:true})
       }
-    } catch (error) {
-      console.log(error.message);
-      this.setState({programareError:true})
-    }
   }
 
   async _callAPI(programObj) {
-    this.setState({inProgress:true})
-    const resp = await fetch("http://localhost:8080/programare/add", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: this.props.token
-      },
-      body: JSON.stringify({
-        data: programObj.data,
-        nume: programObj.nume,
-        prenume: programObj.prenume,
-        email: programObj.email,
-        nrtel: programObj.nrtel,
-        medic: programObj.medic
-      })
-    });
-    this.setState({inProgress:false});  
-    return resp;
+    this.setState({ inProgress: true });
+    try {
+      const resp = await fetch(Api.addProgramare, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: this.props.token
+        },
+        body: JSON.stringify({
+          data: programObj.data,
+          nume: programObj.nume,
+          prenume: programObj.prenume,
+          email: programObj.email,
+          nrtel: programObj.nrtel,
+          medic: programObj.medic
+        })
+      });
+      if (resp.status !== 201) {
+        throw new Error(JSON.stringify(resp));
+      }
+      this.setState({ inProgress: false, programareSuccess:true });
+    } catch (error) {
+      this.setState({ programareError: true, inProgress:false});
     }
   }
-
+}
 
 function Transition(props) {
   return <Slide direction="up" {...props} />;
@@ -408,7 +408,6 @@ function disableDates(data) {
   let dataAzi = new Date();
 
   if (data.date.setHours(0, 0, 0, 0) === dataAzi.setHours(0, 0, 0, 0)) {
-    console.log("DISABLE");
     return true;
   }
   return false;

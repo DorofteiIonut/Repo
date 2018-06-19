@@ -10,10 +10,11 @@
 }
 
 .loginButtonStyle{
-    margin-left: 30%;
+    margin-left: 20%;
     margin-right: 5%;
     margin-top: 10%;
-    width: 70%;
+    width: 60%;
+    height: 30%;
 }
 
 .textWarningDiv{
@@ -28,6 +29,10 @@
     width: 100%;
     height: 100%;
     margin-left: 9%;
+}
+.divIcon{  
+      width: 30%;
+    height: 30%;
 }
 
 

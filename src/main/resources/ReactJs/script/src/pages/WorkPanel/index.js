@@ -10,9 +10,12 @@ import programariAction from "../../commun/ReduxActions/ProgramariAction";
 
 
 class WorkPanel extends Component {
+  constructor(props) {
+    super(props);
+  }
 
      render() {
-
+      console.log(this.props.id_programare);
         return (
             <div className="divBackgroundWorkPanel">
                 <Header isLoginPage={true}/>
@@ -25,18 +28,27 @@ class WorkPanel extends Component {
         );
       }
       renderlistaProgramari(){
-        let listaProgramari=[];
+        let listaProgramare=[];
         for(let i=0;i<5;i++ ){
-          listaProgramari.push(<CardWorkPanel/>)
+          listaProgramare.push(
+          <CardWorkPanel
+          // idProgramare={this.props.listaProgramari.listaProgramari[i].id_programare}
+          // dataProgramare={this.props.listaProgramari.listaProgramari[i].data}
+          // firstname={this.props.listaProgramari.listaProgramari[i].nume}
+          // lastname={this.props.listaProgramari.listaProgramari[i].prenume}
+          // mail={this.props.listaProgramari.listaProgramari[i].email}
+          // tel={this.props.listaProgramari.listaProgramari[i].nrtel}
+          
+          />)
         }
-        return listaProgramari;
+        return listaProgramare;
       }
     }
 
     function mapStateToProps(state) {
       return {
         authInfo: state.authReducer,
-        getProgramari: state.getProgramari,
+        listaProgramari: state.listaProgramari,
       };
     }
     

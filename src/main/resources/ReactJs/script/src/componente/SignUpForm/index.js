@@ -9,8 +9,6 @@ import red from "material-ui/colors/red";
 import Button from "material-ui/Button";
 import Dialog, {
   DialogActions,
-  DialogContent,
-  DialogContentText,
   DialogTitle
 } from "material-ui/Dialog";
 import Slide from "material-ui/transitions/Slide";
