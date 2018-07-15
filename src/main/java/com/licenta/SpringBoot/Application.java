@@ -7,7 +7,7 @@ import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 
-@SpringBootApplication(scanBasePackages={"com.licenta"})
+@SpringBootApplication(scanBasePackages={"com.licenta.SpringBoot"})
 public class Application {
 	
 	public static void main(String[] args) {
